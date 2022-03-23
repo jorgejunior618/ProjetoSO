@@ -16,7 +16,7 @@ public class Empacotador extends Thread {
 		long inicio = System.currentTimeMillis();
 		while(System.currentTimeMillis() - inicio  < (long) tempoEmpacotamento * 1000) {
 		}
-		System.out.println("Terminei");
+		System.out.println(String.format("%s Terminou", getName()));
 	}
 	
 	private void inserirPacote() {
@@ -36,9 +36,7 @@ public class Empacotador extends Thread {
 			Main.mutex.release();
 			Main.full.release();
 			
-			System.out.println(String.format("Carga do Deposito: %d", Main.cargaDeposito));
-			
+			System.out.println(String.format("Carga do Deposito: %d", Main.cargaDeposito));	
 		}
 	}
-	
 }
