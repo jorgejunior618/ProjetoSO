@@ -32,10 +32,7 @@ public class Trem extends Thread{
 				e.printStackTrace();
 			}
 			descarregarPacote();
-			if(){
-				Main.full.acquire();
-			}
+			Main.full.acquire();
 			Main.mutex.acquire();
 		}
 	}
-}
