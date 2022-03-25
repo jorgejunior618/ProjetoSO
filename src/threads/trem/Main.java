@@ -10,11 +10,13 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Main extends Application {
-	private static Empacotador[] empacotadores = new Empacotador[10];
-	private static Trem tremDeCarga = new Trem();
+	public static Empacotador[] empacotadores = new Empacotador[10];
+	public static Trem tremDeCarga = new Trem();
 
-	public static Semaphore empty = new Semaphore(3);
-	public static Semaphore full = new Semaphore(0);
+	public static int cargaMaxima;
+	public static Semaphore empty = new Semaphore(10);
+	public static Semaphore depositoCheio = new Semaphore(0);
+
 	public static Semaphore mutex = new Semaphore(1);
 
 	public static int cargaDeposito = 0;
@@ -26,6 +28,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root,900,460);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -18,7 +18,7 @@
             </ImageView>
             <AnchorPane layoutX="45.0" layoutY="39.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#addEmpacotador" text="Adicionar Empacotador" />
+                  <Button mnemonicParsing="false" text="Adicionar Empacotador" />
                </children>
             </AnchorPane>
             <Label layoutX="228.0" layoutY="43.0" text="Quantidade de Empacotadores:" />

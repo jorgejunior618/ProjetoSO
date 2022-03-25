@@ -13,9 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class TelaEstacaoController implements Initializable {
-	int quantidadeEmpacotadores = 0;
-	boolean apertou = false;
-	boolean trabalhando = true;
 	
 	@FXML
 	private Label qtdEmpacotadores;
@@ -48,9 +45,8 @@ public class TelaEstacaoController implements Initializable {
 	}
 	
 	@FXML
-	private void realizarEntrega(ActionEvent event) {
-		quantidadeEmpacotadores ++;
-		qtdEmpacotadores.setText(Integer.toString(quantidadeEmpacotadores));
+	public void realizarEntregaController(ActionEvent event) {
+		boolean apertou = true;
 		if (!apertou) {
 			animaTremSaida(20);
 		} else {
@@ -60,23 +56,43 @@ public class TelaEstacaoController implements Initializable {
 	}
 
 	@FXML
-	private void addEmpacotador(ActionEvent event) {
-		quantidadeEmpacotadores++;
-		qtdEmpacotadores.setText(Integer.toString(quantidadeEmpacotadores));
-		
+	public void comecarTrabalhoEmpacotadorController(ActionEvent event) {
 		Image estadoEmpacotador;
 		
-		if (trabalhando) {
-			estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadorpronto.png"));
-		} else {
-			estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));			
-		}
+		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));
 		empacotador1.setImage(estadoEmpacotador);
-		trabalhando = !trabalhando;
+	}
+	
+	
+
+	@FXML
+	public void terminarTrabalhoEmpacotadorController(ActionEvent event) throws InterruptedException {
+		Image estadoEmpacotador;
+		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadorpronto.png"));
+		empacotador1.setImage(estadoEmpacotador);
+		
+		TranslateTransition translate = new TranslateTransition();
+		translate.setNode(empacotador1);
+		translate.setDuration(Duration.millis(450));
+
+		translate.setFromX(52);
+		translate.setToX(330);
+		
+		translate.play();
+		Thread.sleep(550);
+		
+		
+		translate.setFromX(330);
+		translate.setToX(52);
+		
+		translate.play();
 	}
 
 	@Override
-	public void initialize(URL url, ResourceBundle rb) {;
+	public void initialize(URL url, ResourceBundle rb) {
+		Main.empacotadores[0] = new Empacotador(1, "jorge", 2, this);
+		
+		Main.empacotadores[0].start();
 	}
 	
 }
