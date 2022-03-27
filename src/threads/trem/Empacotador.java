@@ -16,50 +16,54 @@ public class Empacotador extends Thread {
 	}
 
 	private void empacotar() {
-		this.controller.comecarTrabalhoEmpacotadorController(null);
-		
+		System.out.println(String.format("%s Começando trabalho", getName()));
 		long inicio = System.currentTimeMillis();
-		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 400) {
+		
+		this.controller.comecarTrabalhoEmpacotador(this.id - 1);
+		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500) {
 		}
+		System.out.println(String.format("%s Terminou de empacotar", getName()));
+		this.controller.ficarProntoEmpacotador(this.id - 1);
 	}
 
-	private void guardar() throws InterruptedException {
-		this.controller.terminarTrabalhoEmpacotadorController(null);
+	private void deixarPacote() throws InterruptedException {
+		this.controller.entregarPacoteEmpacotador(this.id - 1);
 
 		long inicio = System.currentTimeMillis();
-		while(System.currentTimeMillis() - inicio  < 400) {
+		while(System.currentTimeMillis() - inicio  < 500) {
 		}
-		System.out.println(String.format("%s Terminou", getName()));
 	}
 
 	private void inserirPacote() {
 		Main.cargaDeposito += 1;
+		System.out.println(String.format("Carga do Deposito: %d", Main.cargaDeposito));
 		if (Main.cargaDeposito == Main.cargaMaxima) {
 			Main.depositoCheio.release();
+			System.out.println("Depósito Cheio");
+		}
+	}
+
+	private void voltarAoPosto() throws InterruptedException {
+		long inicio = System.currentTimeMillis();
+
+		this.controller.voltarAoTrabalhoEmpacotador(id - 1);
+		while(System.currentTimeMillis() - inicio  < 500) {
 		}
 	}
 
 	public void run() {
 		while(true) {
-			
-			
-			empacotar();
 			try {
-				guardar();
+				empacotar();
+				Main.empty.acquire();
+				Main.mutex.acquire();
+				deixarPacote();
+				inserirPacote();
+				Main.mutex.release();
+				voltarAoPosto();
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			try {
-				Main.empty.acquire();
-				Main.mutex.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			inserirPacote();
-			Main.mutex.release();
-			
-			System.out.println(String.format("Carga do Deposito: %d", Main.cargaDeposito));	
 		}
 	}
 }
