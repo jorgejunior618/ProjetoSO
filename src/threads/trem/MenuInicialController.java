@@ -159,23 +159,18 @@ public class MenuInicialController implements Initializable {
 		switch (Main.modoJogo) {
 			case CRIATIVO:
 				Main.cargaMaxima = Integer.parseInt(cargaDeposito.getText());
-				Main.tremDeCarga = new Trem(
-					1,
-					Integer.parseInt(cargaDeposito.getText()),
-					Integer.parseInt(tempoViagem.getText())
-				);
+				
 				Main.empty = new Semaphore(Integer.parseInt(cargaDeposito.getText()));
 				Main.qtdEmpacotadores = Integer.parseInt(qtdEmpacotadores.getText());
 				Main.tempoEmpacotamentoInicial = Integer.parseInt(tempoEmpacotamento.getText());
 				Main.tempoViagemInicial = Integer.parseInt(tempoViagem.getText());
 				break;
 			case DESAFIO:
-				Main.cargaMaxima = 20;
+				Main.cargaMaxima = 5;
 				Main.qtdEmpacotadores = 1;
-				Main.tempoEmpacotamentoInicial = 10;
-				Main.tempoViagemInicial = 10;
-				Main.tremDeCarga = new Trem(1, 20, 10);
-				Main.empty = new Semaphore(20);
+				Main.tempoEmpacotamentoInicial = 5;
+				Main.tempoViagemInicial = 30;
+				Main.empty = new Semaphore(5);
 				break;
 
 			default:
@@ -187,6 +182,8 @@ public class MenuInicialController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Estação de Trem");
             stage.setScene(new Scene(root, 900, 460));
+            stage.setResizable(false);
+            
             stage.show();
             
             ((Node) event.getSource()).getScene().getWindow().hide();
