@@ -3,18 +3,21 @@ package threads.trem;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 public class TelaEstacaoController implements Initializable {
-	private boolean apertou = false;
 	private Image imagemEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));
 	
 	private ImageView[] empacotadores = new ImageView[10];
@@ -23,19 +26,32 @@ public class TelaEstacaoController implements Initializable {
 	private AnchorPane mainPane;
 	
 	@FXML
-	private Label qtdEmpacotadores;
+	private TextField qtdPacotes;
 	
 	@FXML
 	private ImageView tremEstacao;
-	
 
 	@FXML
+	private ImageView tremProgresso;
+	
+	@FXML
 	private AnchorPane progressoPane;
+	
+	@FXML
+	private ProgressBar progressoCaminhoTrem;
+	
+	public void mudaTextoQtdPacotes() {
+		String novoTexto = String.format("%d", Main.cargaDeposito);
+		qtdPacotes.setText(novoTexto);
+	}
 	
 	/* ----------- MÉTODOS DE ANUIMAÇÃO: EMPACOTADOR ----------- */
 
 	@FXML
 	public void addEmpacotador() {
+		if(Main.qtdEmpacotadores >= 10) {
+			return;
+		}
 		empacotadores[Main.qtdEmpacotadores] = new ImageView(imagemEmpacotador);
 		
 		empacotadores[Main.qtdEmpacotadores].setLayoutX(52 + (46 * (Main.qtdEmpacotadores % 5)));
@@ -100,59 +116,81 @@ public class TelaEstacaoController implements Initializable {
 
 	/* ----------- MÉTODOS DE ANUIMAÇÃO: TREM ----------- */
 
-	@FXML
-	public void realizarEntrega() {
-		if (apertou) {
-			animaTremChegada(20);
-			
-		} else {
-			animaTremSaida(20);			
-		}
-		apertou = !apertou;
+	public void iniciarTrajetoMiniTrem() {
+		RotateTransition rotate = new RotateTransition();
+		rotate.setNode(tremProgresso);
+		rotate.setDuration(Duration.millis(200));
+		rotate.setDelay(Duration.millis((Main.tempoViagemInicial * 500) - 500));
+		rotate.setByAngle(180);
+		rotate.setAxis(Rotate.Y_AXIS);
+		rotate.play();
+		
+		TranslateTransition translateProgresso = new TranslateTransition();
+		translateProgresso.setNode(tremProgresso);
+		translateProgresso.setFromX(0);
+		translateProgresso.setDuration(Duration.millis((Main.tempoViagemInicial * 500) - 500));
+		translateProgresso.setToX(550);
+		translateProgresso.play();
+
 	}
-	
-	private void animaTremSaida(int duracaoViagem) {
+
+	public void retornarTrajetoMiniTrem() {
+		RotateTransition rotate = new RotateTransition();
+		rotate.setNode(tremProgresso);
+		rotate.setDuration(Duration.millis(200));
+		rotate.setDelay(Duration.millis((Main.tempoViagemInicial * 500) - 500));
+		rotate.setByAngle(180);
+		rotate.setAxis(Rotate.Y_AXIS);
+		rotate.play();
+
+		TranslateTransition translateProgresso = new TranslateTransition();
+		translateProgresso.setNode(tremProgresso);
+		translateProgresso.setFromX(550);
+		translateProgresso.setDuration(Duration.millis((Main.tempoViagemInicial * 500) - 500));
+		translateProgresso.setToX(0);
+		translateProgresso.play();
+	}
+
+	public void sairParaEntregaTrem() {
+		progressoPane.setVisible(true);
 		TranslateTransition translate = new TranslateTransition();
+		
 		translate.setNode(tremEstacao);
 		translate.setFromX(10);
 
-		translate.setDuration(Duration.millis(duracaoViagem * 100));
+		translate.setDuration(Duration.millis(2000));
 		
 		translate.setToX(910);
 		translate.play();
 	}
 
-	private void animaTremChegada(int duracaoViagem) {
+	public void chegaNaEstacaoTrem() {
+		
 		TranslateTransition translate = new TranslateTransition();
 		translate.setNode(tremEstacao);
 		translate.setFromX(-345);
-		translate.setDuration(Duration.millis(duracaoViagem * 100));
+		translate.setDuration(Duration.millis(2000));
 		
 		translate.setToX(10);
 		translate.play();
 	}
 	
-	
-	@FXML
-	private void tremEntregarPacotes() throws InterruptedException {
-		realizarEntrega();
-//		progressoPane.setVisible(true);
-		if (!apertou) return;
-		int i;
-		Main.depositoCheio.acquire();
-		Main.mutex.acquire();
-		
-		for(i = 0; i < Main.cargaMaxima; i++) {
-			Main.empty.release();
-			Main.cargaDeposito -= 1;
+	public void atualizarProgressoTrem(double progresso) {
+		progressoCaminhoTrem.setProgress(progresso);
+		if (progresso > 0.98) {
+			progressoPane.setVisible(false);
 		}
-		Main.mutex.release();
 	}
-
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		int i;
-		
+
+		Main.tremDeCarga = new Trem(
+			1,
+			Main.cargaMaxima,
+			this
+		);
 		Main.tremDeCarga.start();
 		
 		progressoPane.setVisible(false);
