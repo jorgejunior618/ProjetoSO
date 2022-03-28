@@ -16,13 +16,11 @@ public class Empacotador extends Thread {
 	}
 
 	private void empacotar() {
-		System.out.println(String.format("%s Começando trabalho", getName()));
 		long inicio = System.currentTimeMillis();
 		
 		this.controller.comecarTrabalhoEmpacotador(this.id - 1);
 		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500) {
 		}
-		System.out.println(String.format("%s Terminou de empacotar", getName()));
 		this.controller.ficarProntoEmpacotador(this.id - 1);
 	}
 
@@ -36,10 +34,11 @@ public class Empacotador extends Thread {
 
 	private void inserirPacote() {
 		Main.cargaDeposito += 1;
-		System.out.println(String.format("Carga do Deposito: %d", Main.cargaDeposito));
+
+		this.controller.mudaTextoQtdPacotes();
 		if (Main.cargaDeposito == Main.cargaMaxima) {
 			Main.depositoCheio.release();
-			System.out.println("Depósito Cheio");
+			System.out.println("Depï¿½sito Cheio");
 		}
 	}
 
