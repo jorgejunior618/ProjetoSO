@@ -152,8 +152,10 @@ public class TelaEstacaoController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		int i;
-		progressoPane.setOpacity(0.6);
-//		progressoPane.setVisible(false);
+		
+		Main.tremDeCarga.start();
+		
+		progressoPane.setVisible(false);
 		for (i = 0; i < Main.qtdEmpacotadores; i++) {
 			empacotadores[i] = new ImageView(imagemEmpacotador);
 			

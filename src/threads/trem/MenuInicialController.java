@@ -172,7 +172,7 @@ public class MenuInicialController implements Initializable {
 			case DESAFIO:
 				Main.cargaMaxima = 20;
 				Main.qtdEmpacotadores = 1;
-				Main.tempoEmpacotamentoInicial = 2;
+				Main.tempoEmpacotamentoInicial = 10;
 				Main.tempoViagemInicial = 10;
 				Main.tremDeCarga = new Trem(1, 20, 10);
 				Main.empty = new Semaphore(20);
@@ -188,7 +188,7 @@ public class MenuInicialController implements Initializable {
             stage.setTitle("Estação de Trem");
             stage.setScene(new Scene(root, 900, 460));
             stage.show();
-            // Hide this current window (if this is what you want)
+            
             ((Node) event.getSource()).getScene().getWindow().hide();
         }
         catch (IOException e) {
