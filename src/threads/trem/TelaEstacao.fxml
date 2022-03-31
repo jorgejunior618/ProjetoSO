@@ -35,7 +35,7 @@
             <TextField fx:id="qtdPacotes" alignment="CENTER" editable="false" layoutX="514.0" layoutY="89.0" prefHeight="25.0" prefWidth="35.0" text="0" />
             <AnchorPane fx:id="progressoPane" layoutY="370.0" prefHeight="90.0" prefWidth="900.0">
                <children>
-                  <ProgressBar fx:id="progressoCaminhoTrem" layoutX="182.0" layoutY="41.0" prefHeight="24.0" prefWidth="550.0" progress="0.0" style="-fx-background-color: green;" />
+                  <ProgressBar fx:id="progressoCaminhoTrem" layoutX="182.0" layoutY="41.0" prefHeight="24.0" prefWidth="550.0" progress="0.0" />
                   <ImageView fitHeight="76.0" fitWidth="70.0" layoutX="35.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/DepositoA_mini.png" />
