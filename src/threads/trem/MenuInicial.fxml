@@ -11,9 +11,9 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="threads.trem.MenuInicialController">
    <children>
-      <AnchorPane prefHeight="300.0" prefWidth="300.0">
+      <AnchorPane prefHeight="500.0" prefWidth="400.0">
          <children>
-            <TabPane fx:id="tabPane" prefHeight="300.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab fx:id="tabSelecao" text="Modo de Jogo">
                   <content>
@@ -58,40 +58,46 @@
                                     <Font name="Gabriola" size="36.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="25.0" layoutY="67.0" text="Quantidade de Empacotadores">
+                              <Label layoutX="25.0" layoutY="97.0" text="Quantidade de Empacotadores">
                                  <font>
                                     <Font name="Georgia" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="qtdEmpacotadores" layoutX="225.0" layoutY="63.0" prefHeight="25.0" prefWidth="50.0" />
-                              <Label layoutX="25.0" layoutY="98.0" text="Tempo de Empacotamento">
+                              <TextField fx:id="qtdEmpacotadores" layoutX="306.0" layoutY="93.0" prefHeight="25.0" prefWidth="70.0" />
+                              <Label layoutX="25.0" layoutY="138.0" text="Tempo de Empacotamento (em segundos)">
                                  <font>
                                     <Font name="Georgia" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tempoEmpacotamento" layoutX="225.0" layoutY="94.0" prefHeight="25.0" prefWidth="50.0" />
-                              <Label layoutX="25.0" layoutY="129.0" text="Tempo de Viagem do Trem">
+                              <TextField fx:id="tempoEmpacotamento" layoutX="306.0" layoutY="134.0" prefHeight="25.0" prefWidth="70.0" />
+                              <Label layoutX="25.0" layoutY="179.0" text="Tempo de Viagem do Trem (em segundos)">
                                  <font>
                                     <Font name="Georgia" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tempoViagem" layoutX="225.0" layoutY="125.0" prefHeight="25.0" prefWidth="50.0" />
-                              <Label layoutX="25.0" layoutY="160.0" text="Carga Máxima do Depósito">
+                              <TextField fx:id="tempoViagem" layoutX="306.0" layoutY="175.0" prefHeight="25.0" prefWidth="70.0" />
+                              <Label layoutX="25.0" layoutY="220.0" text="Carga Máxima do Depósito">
                                  <font>
                                     <Font name="Georgia" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="cargaDeposito" layoutX="225.0" layoutY="156.0" prefHeight="25.0" prefWidth="50.0" />
-                              <Button layoutX="165.0" layoutY="227.0" mnemonicParsing="false" onAction="#iniciarJogo" prefHeight="30.0" prefWidth="120.0" text="Começar Dia">
+                              <TextField fx:id="cargaDeposito" layoutX="306.0" layoutY="216.0" prefHeight="25.0" prefWidth="70.0" />
+                              <Button layoutX="257.0" layoutY="418.0" mnemonicParsing="false" onAction="#iniciarJogo" prefHeight="30.0" prefWidth="120.0" text="Começar Dia">
                                  <font>
                                     <Font name="Georgia" size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="25.0" layoutY="227.0" mnemonicParsing="false" onAction="#voltarModoJogo" prefHeight="30.0" prefWidth="120.0" text="&lt;- Voltar">
+                              <Button layoutX="25.0" layoutY="418.0" mnemonicParsing="false" onAction="#voltarModoJogo" prefHeight="30.0" prefWidth="120.0" text="&lt;- Voltar">
                                  <font>
                                     <Font name="Georgia" size="14.0" />
                                  </font>
                               </Button>
+                              <Label layoutX="25.0" layoutY="261.0" text="Carga Máxima do Vagão do Trem">
+                                 <font>
+                                    <Font name="Georgia" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="cargaDeposito1" layoutX="306.0" layoutY="257.0" prefHeight="25.0" prefWidth="70.0" />
                            </children>
                         </AnchorPane>
                   </content>

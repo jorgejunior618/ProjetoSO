@@ -1,1 +1,16 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.blue-bar  {
+  -fx-accent: orange;
+  -fx-padding: 0;
+  -fx-background-insets: 0; 
+}
+
+.blue-bar .bar  {
+  -fx-padding: 0;
+  -fx-background-insets: 0; 
+}
+ 
+.blue-bar > .track {
+  -fx-text-box-border: blue;
+  -fx-control-inner-background: blue;
+}

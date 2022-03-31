@@ -11,30 +11,32 @@ public class Trem extends Thread{
 		this.controller = controller;
 	}
 	
-	private void transportar() {
-		this.controller.sairParaEntregaTrem();
-		this.controller.iniciarTrajetoMiniTrem();
+	private void ida(long inicio) {
 		System.out.println("Saindo para entrega");
 		
-		long inicio = System.currentTimeMillis();
 		long tempoCorrido = 0;
 
-		double progresso = 0.000000; 
+		double progresso = 0.000000;
 		this.controller.atualizarProgressoTrem(progresso);
 		while(tempoCorrido < (long) tempoTransporte * 500) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
-			int andamento = (int) tempoCorrido / (tempoTransporte*1);
+			int andamento = (int) tempoCorrido * 2 / (tempoTransporte * 1);
 			if (andamento  / 1000.0 != progresso) {
 				progresso = andamento / 1000.0;
 				this.controller.atualizarProgressoTrem(progresso);
 			}
 		}
-		this.controller.retornarTrajetoMiniTrem();
-		while(tempoCorrido < (long) tempoTransporte * 1000 - 2500) {
+	}
+	
+	private void volta(long inicio) {
+		double progresso = 1.00000;
+		long tempoCorrido = tempoTransporte * 500;
+		
+		while(tempoCorrido < (long) tempoTransporte * 1000 - 1500) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
-			int andamento = (int) tempoCorrido / (tempoTransporte*1);
+			int andamento = (tempoTransporte * 200) - (int) tempoCorrido * 2 / (tempoTransporte*1);
 			if (andamento  / 1000.0 != progresso) {
 				progresso = andamento / 1000.0;
 				this.controller.atualizarProgressoTrem(progresso);
@@ -44,7 +46,7 @@ public class Trem extends Thread{
 		while(System.currentTimeMillis() - inicio  < (long) tempoTransporte * 1000) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
-			int andamento = (int) tempoCorrido /(tempoTransporte*1);
+			int andamento =  (tempoTransporte * 200) -  (int) tempoCorrido * 2 /(tempoTransporte*1);
 			if (andamento / 1000.0 != progresso) {
 				progresso = andamento / 1000.0;
 				this.controller.atualizarProgressoTrem(progresso);
@@ -54,11 +56,21 @@ public class Trem extends Thread{
 		System.out.println(String.format("O Trem voltou à estação"));
 	}
 
+	private void transportar() {
+		long inicio = System.currentTimeMillis();
+		this.controller.sairParaEntregaTrem();
+//		this.controller.iniciarTrajetoMiniTrem();
+		ida(inicio);
+
+//		this.controller.retornarTrajetoMiniTrem();
+		volta(inicio);
+	}
+
 	private void encherCarga() {
 		System.out.println("Movendo Pacotes do depósito para Carga do trem");
 		int i;
 		
-		for (i = 0; i < Main.cargaMaxima; i++) {
+		for (i = 0; i < Main.cargaMaximaVagao; i++) {
 			Main.cargaDeposito -= 1;
 			Main.empty.release();
 		}
@@ -68,7 +80,7 @@ public class Trem extends Thread{
 	public void run() {
 		while(true) {
 			try {
-				Main.depositoCheio.acquire();
+				Main.full.acquire();
 				Main.mutex.acquire();
 				encherCarga();
 				Main.mutex.release();

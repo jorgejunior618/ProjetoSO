@@ -18,14 +18,14 @@ public class Empacotador extends Thread {
 	private void empacotar() {
 		long inicio = System.currentTimeMillis();
 		
-		this.controller.comecarTrabalhoEmpacotador(this.id - 1);
+		this.controller.comecarTrabalhoEmpacotador(this.id);
 		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500) {
 		}
-		this.controller.ficarProntoEmpacotador(this.id - 1);
+		this.controller.ficarProntoEmpacotador(this.id);
 	}
 
 	private void deixarPacote() throws InterruptedException {
-		this.controller.entregarPacoteEmpacotador(this.id - 1);
+		this.controller.entregarPacoteEmpacotador(this.id);
 
 		long inicio = System.currentTimeMillis();
 		while(System.currentTimeMillis() - inicio  < 500) {
@@ -33,19 +33,18 @@ public class Empacotador extends Thread {
 	}
 
 	private void inserirPacote() {
-		Main.cargaDeposito += 1;
-
-		this.controller.mudaTextoQtdPacotes();
-		if (Main.cargaDeposito == Main.cargaMaxima) {
-			Main.depositoCheio.release();
-			System.out.println("Dep�sito Cheio");
+		if (Main.cargaDeposito == Main.cargaMaximaVagao) {
+			Main.full.release();
 		}
+
+		Main.cargaDeposito += 1;
+		this.controller.mudaTextoQtdPacotes();
 	}
 
 	private void voltarAoPosto() throws InterruptedException {
 		long inicio = System.currentTimeMillis();
 
-		this.controller.voltarAoTrabalhoEmpacotador(id - 1);
+		this.controller.voltarAoTrabalhoEmpacotador(id);
 		while(System.currentTimeMillis() - inicio  < 500) {
 		}
 	}

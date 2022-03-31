@@ -158,19 +158,22 @@ public class MenuInicialController implements Initializable {
 	private void criarJogo(ActionEvent event) {
 		switch (Main.modoJogo) {
 			case CRIATIVO:
-				Main.cargaMaxima = Integer.parseInt(cargaDeposito.getText());
-				
+				Main.cargaMaximaDeposito = Integer.parseInt(cargaDeposito.getText());
 				Main.empty = new Semaphore(Integer.parseInt(cargaDeposito.getText()));
+
+				Main.cargaMaximaVagao = 5; // RECEBER VALOR
 				Main.qtdEmpacotadores = Integer.parseInt(qtdEmpacotadores.getText());
 				Main.tempoEmpacotamentoInicial = Integer.parseInt(tempoEmpacotamento.getText());
 				Main.tempoViagemInicial = Integer.parseInt(tempoViagem.getText());
 				break;
 			case DESAFIO:
-				Main.cargaMaxima = 5;
+				Main.cargaMaximaDeposito = 10;
+				Main.empty = new Semaphore(10);
+
+				Main.cargaMaximaVagao = 5;
 				Main.qtdEmpacotadores = 1;
 				Main.tempoEmpacotamentoInicial = 5;
 				Main.tempoViagemInicial = 30;
-				Main.empty = new Semaphore(5);
 				break;
 
 			default:
@@ -179,9 +182,13 @@ public class MenuInicialController implements Initializable {
 		BorderPane root;
         try {
         	root = (BorderPane)FXMLLoader.load(getClass().getResource("TelaEstacao.fxml"));
+        	
+        	Scene scene = new Scene(root, 900, 460);
+        	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
             Stage stage = new Stage();
             stage.setTitle("Estação de Trem");
-            stage.setScene(new Scene(root, 900, 460));
+            stage.setScene(scene);
             stage.setResizable(false);
             
             stage.show();

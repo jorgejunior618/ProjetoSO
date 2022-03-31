@@ -19,9 +19,10 @@ public class Main extends Application {
 	
 	public static ModoJogo modoJogo;
 
-	public static int cargaMaxima;
+	public static int cargaMaximaDeposito;	// M
+	public static int cargaMaximaVagao;		// N
 	public static Semaphore empty;
-	public static Semaphore depositoCheio = new Semaphore(0);
+	public static Semaphore full = new Semaphore(0);
 
 	public static Semaphore mutex = new Semaphore(1);
 

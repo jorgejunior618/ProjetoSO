@@ -3,18 +3,14 @@ package threads.trem;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 public class TelaEstacaoController implements Initializable {
@@ -31,9 +27,6 @@ public class TelaEstacaoController implements Initializable {
 	@FXML
 	private ImageView tremEstacao;
 
-	@FXML
-	private ImageView tremProgresso;
-	
 	@FXML
 	private AnchorPane progressoPane;
 	
@@ -61,7 +54,7 @@ public class TelaEstacaoController implements Initializable {
 		
 		String nome = String.format("Empacotador %d", Main.qtdEmpacotadores+1);
 		Main.empacotadores[Main.qtdEmpacotadores] = new Empacotador(
-			Main.qtdEmpacotadores+1,
+			Main.qtdEmpacotadores,
 			nome,
 			Main.tempoEmpacotamentoInicial, this
 		);
@@ -114,45 +107,11 @@ public class TelaEstacaoController implements Initializable {
 		translate.play();
 	}
 
-	/* ----------- MÉTODOS DE ANUIMAÇÃO: TREM ----------- */
+	/* ----------- MÉTODOS DE ANIMAÇÃO: TREM ----------- */
 
-	public void iniciarTrajetoMiniTrem() {
-		RotateTransition rotate = new RotateTransition();
-		rotate.setNode(tremProgresso);
-		rotate.setDuration(Duration.millis(200));
-		rotate.setDelay(Duration.millis((Main.tempoViagemInicial * 500) - 500));
-		rotate.setByAngle(180);
-		rotate.setAxis(Rotate.Y_AXIS);
-		rotate.play();
-		
-		TranslateTransition translateProgresso = new TranslateTransition();
-		translateProgresso.setNode(tremProgresso);
-		translateProgresso.setFromX(0);
-		translateProgresso.setDuration(Duration.millis((Main.tempoViagemInicial * 500) - 500));
-		translateProgresso.setToX(550);
-		translateProgresso.play();
-
-	}
-
-	public void retornarTrajetoMiniTrem() {
-		RotateTransition rotate = new RotateTransition();
-		rotate.setNode(tremProgresso);
-		rotate.setDuration(Duration.millis(200));
-		rotate.setDelay(Duration.millis((Main.tempoViagemInicial * 500) - 500));
-		rotate.setByAngle(180);
-		rotate.setAxis(Rotate.Y_AXIS);
-		rotate.play();
-
-		TranslateTransition translateProgresso = new TranslateTransition();
-		translateProgresso.setNode(tremProgresso);
-		translateProgresso.setFromX(550);
-		translateProgresso.setDuration(Duration.millis((Main.tempoViagemInicial * 500) - 500));
-		translateProgresso.setToX(0);
-		translateProgresso.play();
-	}
 
 	public void sairParaEntregaTrem() {
-		progressoPane.setVisible(true);
+//		progressoPane.setVisible(true);
 		TranslateTransition translate = new TranslateTransition();
 		
 		translate.setNode(tremEstacao);
@@ -169,7 +128,7 @@ public class TelaEstacaoController implements Initializable {
 		TranslateTransition translate = new TranslateTransition();
 		translate.setNode(tremEstacao);
 		translate.setFromX(-345);
-		translate.setDuration(Duration.millis(2000));
+		translate.setDuration(Duration.millis(1500));
 		
 		translate.setToX(10);
 		translate.play();
@@ -177,9 +136,9 @@ public class TelaEstacaoController implements Initializable {
 	
 	public void atualizarProgressoTrem(double progresso) {
 		progressoCaminhoTrem.setProgress(progresso);
-		if (progresso > 0.98) {
-			progressoPane.setVisible(false);
-		}
+//		if (progresso > 0.98) {
+//			progressoPane.setVisible(false);
+//		}
 	}
 	
 	@Override
@@ -188,12 +147,14 @@ public class TelaEstacaoController implements Initializable {
 
 		Main.tremDeCarga = new Trem(
 			1,
-			Main.cargaMaxima,
+			Main.cargaMaximaDeposito,
 			this
 		);
 		Main.tremDeCarga.start();
 		
-		progressoPane.setVisible(false);
+//		progressoPane.setVisible(false);
+//		progressoCaminhoTrem.setProgress(0.5);
+		progressoCaminhoTrem.getStyleClass().add("blue-bar");
 		for (i = 0; i < Main.qtdEmpacotadores; i++) {
 			empacotadores[i] = new ImageView(imagemEmpacotador);
 			
@@ -203,7 +164,7 @@ public class TelaEstacaoController implements Initializable {
 			mainPane.getChildren().add(empacotadores[i]);
 			
 			String nome = String.format("Empacotador %d", i+1);
-			Main.empacotadores[i] = new Empacotador(i+1, nome, Main.tempoEmpacotamentoInicial, this);
+			Main.empacotadores[i] = new Empacotador(i, nome, Main.tempoEmpacotamentoInicial, this);
 			
 			Main.empacotadores[i].start();
 		}

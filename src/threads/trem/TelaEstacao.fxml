@@ -32,14 +32,10 @@
                   <Image url="@assets/trem.png" />
                </image>
             </ImageView>
+            <TextField fx:id="qtdPacotes" alignment="CENTER" editable="false" layoutX="514.0" layoutY="89.0" prefHeight="25.0" prefWidth="35.0" text="0" />
             <AnchorPane fx:id="progressoPane" layoutY="370.0" prefHeight="90.0" prefWidth="900.0">
                <children>
-                  <ImageView fx:id="tremProgresso" fitHeight="35.0" fitWidth="100.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" x="130.0" y="11.0">
-                     <image>
-                        <Image url="@assets/trem-trajeto.png" />
-                     </image>
-                  </ImageView>
-                  <ProgressBar fx:id="progressoCaminhoTrem" layoutX="180.0" layoutY="54.0" prefHeight="24.0" prefWidth="550.0" progress="0.0" />
+                  <ProgressBar fx:id="progressoCaminhoTrem" layoutX="182.0" layoutY="41.0" prefHeight="24.0" prefWidth="550.0" progress="0.0" style="-fx-background-color: green;" />
                   <ImageView fitHeight="76.0" fitWidth="70.0" layoutX="35.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/DepositoA_mini.png" />
@@ -52,7 +48,6 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TextField fx:id="qtdPacotes" alignment="CENTER" editable="false" layoutX="514.0" layoutY="89.0" prefHeight="25.0" prefWidth="35.0" text="0" />
          </children>
       </AnchorPane>
    </top>
