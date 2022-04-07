@@ -12,7 +12,7 @@ public class Trem extends Thread{
 	}
 	
 	private void ida(long inicio) {
-		System.out.println("Saindo para entrega");
+		System.out.println("Saindo para entrega.");
 		
 		long tempoCorrido = 0;
 
@@ -52,8 +52,9 @@ public class Trem extends Thread{
 				this.controller.atualizarProgressoTrem(progresso);
 			}
 		}
-		
-		System.out.println(String.format("O Trem voltou à estação"));
+		System.out.println(String.format("O Trem voltou Ã  estaÃ§Ã£o."));
+		Main.qtmoedas+=1;
+		System.out.println("Voce adquiriu 1 moeda.");
 	}
 
 	private void transportar() {
@@ -67,7 +68,7 @@ public class Trem extends Thread{
 	}
 
 	private void encherCarga() {
-		System.out.println("Movendo Pacotes do depósito para Carga do trem");
+		System.out.println("Movendo Pacotes do depÃ³sito para Carga do trem.");
 		int i;
 		
 		for (i = 0; i < Main.cargaMaximaVagao; i++) {
