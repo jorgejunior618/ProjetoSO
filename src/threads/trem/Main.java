@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
-
 public class Main extends Application {
 	public static Empacotador[] empacotadores = new Empacotador[10];
 	public static Trem tremDeCarga;
@@ -27,6 +26,10 @@ public class Main extends Application {
 	public static Semaphore mutex = new Semaphore(1);
 
 	public static int cargaDeposito = 0;
+		
+	public static int qtmoedas = 0;			//Variavel que guarda as moedas atuais.
+	
+	public static Sound musica;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -44,6 +47,11 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		String filepath = "filepath";
+		
+		Sound musica = new Sound();
+		musica.playmusic(filepath);
+		
 		launch(args);
 	}
 }
