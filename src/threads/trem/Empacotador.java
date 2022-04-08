@@ -33,11 +33,14 @@ public class Empacotador extends Thread {
 	}
 
 	private void inserirPacote() {
+		Main.cargaDeposito += 1;
+
 		if (Main.cargaDeposito == Main.cargaMaximaVagao) {
+			Main.full.release();
+		} else if (Main.cargaDeposito > Main.cargaMaximaVagao && Main.full.availablePermits() == 0) {
 			Main.full.release();
 		}
 
-		Main.cargaDeposito += 1;
 		this.controller.mudaTextoQtdPacotes();
 	}
 
@@ -55,8 +58,10 @@ public class Empacotador extends Thread {
 				empacotar();
 				Main.empty.acquire();
 				Main.mutex.acquire();
+
 				deixarPacote();
 				inserirPacote();
+				
 				Main.mutex.release();
 				voltarAoPosto();
 			} catch (InterruptedException e1) {
