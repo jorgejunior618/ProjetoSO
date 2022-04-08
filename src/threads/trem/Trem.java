@@ -1,14 +1,18 @@
 package threads.trem;
 
-public class Trem extends Thread{
+public class Trem extends Thread {
 	public int id;
+	public String nome;
 	public int tempoTransporte;
 	public TelaEstacaoController controller;
 
-	public Trem(int id, int tt, TelaEstacaoController controller) {
+	public Trem(int id, int tt, String nome, TelaEstacaoController controller) {
+		super(nome);
 		this.id = id;
+		this.nome = nome;
 		this.tempoTransporte = tt;
 		this.controller = controller;
+		
 	}
 	
 	private void ida(long inicio) {

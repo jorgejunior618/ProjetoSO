@@ -15,13 +15,21 @@ public class Main extends Application {
 	public static boolean encerrarThreads;
 	
 	public static int qtdEmpacotadores;
+	public static int cargaMaximaDeposito;	// M
+	public static int cargaMaximaVagao;		// N
+	
+	// Campos para inicalizar a thread
+	// Empacotadores
 	public static int tempoEmpacotamentoInicial;
+	public static String nomePrimeiroEmpacotador;
+	public static String identificadorPrimeiroEmpacotador;
+	
+	// Trem
 	public static int tempoViagemInicial;
+	public static String nomeTrem;
 	
 	public static ModoJogo modoJogo;
 
-	public static int cargaMaximaDeposito;	// M
-	public static int cargaMaximaVagao;		// N
 	public static Semaphore empty;
 	public static Semaphore full = new Semaphore(0);
 

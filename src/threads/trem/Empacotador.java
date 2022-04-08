@@ -1,15 +1,18 @@
 package threads.trem;
 
 public class Empacotador extends Thread {
-	public int id;
+	private int ultimoId = 0;
+	private int id;
+	public String identificador;
 	public String nome;
 	public int tempoEmpacotamento;
 	public TelaEstacaoController controller;
 
-	public Empacotador(int id, String nome, int te, TelaEstacaoController cont) {
+	public Empacotador(String id, String nome, int te, TelaEstacaoController cont) {
 		super(nome);
 		
-		this.id = id;
+		this.id = ultimoId++;
+		this.identificador = id;
 		this.tempoEmpacotamento = te;
 		this.nome = nome;
 		this.controller = cont;
