@@ -3,7 +3,6 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +16,7 @@
          <children>
             <ImageView fitHeight="512.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Users/joaos/Pictures/Misc/station/mod_resources/station-bg-official.png" />
+                  <Image url="@assets/station-bg-official.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -29,32 +28,17 @@
                </font></Button>
             <ImageView fx:id="tremEstacao" fitHeight="88.0" fitWidth="371.0" layoutX="90.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Users/joaos/Pictures/Misc/station/mod_MOD_resources/train_mod.png" />
+                  <Image url="@assets/train_mod.png" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="progressoPane" layoutY="370.0" prefHeight="90.0" prefWidth="900.0" visible="false">
-               <children>
-                  <ProgressBar fx:id="progressoCaminhoTrem" layoutX="182.0" layoutY="41.0" prefHeight="24.0" prefWidth="550.0" progress="0.0" style="-fx-background-color: green;" />
-                  <ImageView fitHeight="76.0" fitWidth="70.0" layoutX="35.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/DepositoA_mini.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="70.0" layoutX="795.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/DepositoB_mini.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
             <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="232.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Users/joaos/Pictures/Misc/station/mod_MOD_resources/package_full_mod%201.png" />
+                  <Image url="@assets/package_full_mod.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="37.0" fitWidth="26.0" layoutX="206.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Users/joaos/Pictures/Misc/station/mod_MOD_resources/package_full_mod%201.png" />
+                  <Image url="@assets/package_full_mod.png" />
                </image>
             </ImageView>
             <TextField fx:id="qtdPacotes" alignment="CENTER" editable="false" layoutX="232.0" layoutY="226.0" prefHeight="13.0" prefWidth="69.0" text="100">
