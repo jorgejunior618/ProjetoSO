@@ -37,6 +37,8 @@ public class MenuInicialController implements Initializable {
 	
 	@FXML
 	private Button botaoSair;
+
+	Stage stage;
 	
 	@FXML
 	private void iniciarJogo(ActionEvent event) {
@@ -60,10 +62,14 @@ public class MenuInicialController implements Initializable {
             stage.setTitle("Projeto: Estação");
             stage.setScene(scene);
             stage.setResizable(false);
+
+            stage.setOnCloseRequest(closeEvent -> {
+            	closeEvent.consume();
+				Main.fecharJogo(stage);
+			});
             
             stage.show();
-            
-            ((Node) event.getSource()).getScene().getWindow().hide();
+            sair(event);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -84,20 +90,41 @@ public class MenuInicialController implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             
-            stage.show();
+            stage.setOnCloseRequest(closeEvent -> {
+            	closeEvent.consume();
+				Main.fecharJogo(stage);
+			});
             
-            ((Node) event.getSource()).getScene().getWindow().hide();
+            stage.show();
+            sair(event);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
 	}
 	
-	Stage stage;
-	
 	@FXML
 	private void sair(ActionEvent event) {
 		stage = (Stage) telaMenuInicial.getScene().getWindow();
+		
+		boolean empacotadoresAtivos = true;
+		boolean tremAtivo = true;
+		Main.encerrarThreads = true;
+		
+		System.out.println("Encerrando threads");
+		while (empacotadoresAtivos || tremAtivo) {
+			if(tremAtivo) {
+				tremAtivo = (Main.tremDeCarga != null && Main.tremDeCarga.isAlive());
+			}
+			if(empacotadoresAtivos) {
+				for (int i = 0; i < 10; i++) {
+					empacotadoresAtivos = (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive());
+					if (empacotadoresAtivos) break;
+				}
+			}
+		}
+		System.out.println("Threads encerradas");
+		
 		stage.close();
 	}
 	

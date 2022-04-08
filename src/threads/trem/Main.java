@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 	public static Empacotador[] empacotadores = new Empacotador[10];
 	public static Trem tremDeCarga;
+	public static boolean encerrarThreads;
 	
 	public static int qtdEmpacotadores;
 	public static int tempoEmpacotamentoInicial;
@@ -28,14 +29,41 @@ public class Main extends Application {
 
 	public static int cargaDeposito = 0;
 	
+	public static void fecharJogo(Stage stage) {
+		boolean empacotadoresAtivos = true;
+		boolean tremAtivo = true;
+		Main.encerrarThreads = true;
+		
+		System.out.println("Encerrando threads");
+		while (empacotadoresAtivos || tremAtivo) {
+			if(tremAtivo) {
+				tremAtivo = (Main.tremDeCarga != null && Main.tremDeCarga.isAlive());
+			}
+			if(empacotadoresAtivos) {
+				for (int i = 0; i < 10; i++) {
+					empacotadoresAtivos = (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive());
+					if (empacotadoresAtivos) break;
+				}
+			}
+		}
+		System.out.println("Threads encerradas");
+		
+		stage.close();
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
+		encerrarThreads = false;
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("MenuInicial.fxml"));
 			Scene scene = new Scene(root, 500, 420);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
+			primaryStage.setOnCloseRequest(event -> {
+				event.consume();
+				fecharJogo(primaryStage);
+			});
 			
 			primaryStage.show();
 		} catch(Exception e) {

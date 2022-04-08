@@ -18,7 +18,7 @@ public class Trem extends Thread{
 
 		double progresso = 0.000000;
 		this.controller.atualizarProgressoTrem(progresso);
-		while(tempoCorrido < (long) tempoTransporte * 500) {
+		while(tempoCorrido < (long) tempoTransporte * 500 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
 			int andamento = (int) tempoCorrido * 2 / (tempoTransporte * 1);
@@ -33,7 +33,7 @@ public class Trem extends Thread{
 		double progresso = 1.00000;
 		long tempoCorrido = tempoTransporte * 500;
 		
-		while(tempoCorrido < (long) tempoTransporte * 1000 - 1500) {
+		while(tempoCorrido < (long) tempoTransporte * 1000 - 1500 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
 			int andamento = (tempoTransporte * 200) - (int) tempoCorrido * 2 / (tempoTransporte*1);
@@ -43,7 +43,7 @@ public class Trem extends Thread{
 			}
 		}
 		this.controller.chegaNaEstacaoTrem();
-		while(System.currentTimeMillis() - inicio  < (long) tempoTransporte * 1000) {
+		while(System.currentTimeMillis() - inicio  < (long) tempoTransporte * 1000 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
 			int andamento =  (tempoTransporte * 200) -  (int) tempoCorrido * 2 /(tempoTransporte*1);
@@ -78,7 +78,7 @@ public class Trem extends Thread{
 	}
 
 	public void run() {
-		while(true) {
+		while(!Main.encerrarThreads) {
 			try {
 				Main.full.acquire();
 				Main.mutex.acquire();

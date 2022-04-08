@@ -19,7 +19,7 @@ public class Empacotador extends Thread {
 		long inicio = System.currentTimeMillis();
 		
 		this.controller.comecarTrabalhoEmpacotador(this.id);
-		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500) {
+		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500 && !Main.encerrarThreads) {
 		}
 		this.controller.ficarProntoEmpacotador(this.id);
 	}
@@ -28,7 +28,7 @@ public class Empacotador extends Thread {
 		this.controller.entregarPacoteEmpacotador(this.id);
 
 		long inicio = System.currentTimeMillis();
-		while(System.currentTimeMillis() - inicio  < 500) {
+		while(System.currentTimeMillis() - inicio  < 500 && !Main.encerrarThreads) {
 		}
 	}
 
@@ -48,12 +48,12 @@ public class Empacotador extends Thread {
 		long inicio = System.currentTimeMillis();
 
 		this.controller.voltarAoTrabalhoEmpacotador(id);
-		while(System.currentTimeMillis() - inicio  < 500) {
+		while(System.currentTimeMillis() - inicio  < 500 && !Main.encerrarThreads) {
 		}
 	}
 
 	public void run() {
-		while(true) {
+		while(!Main.encerrarThreads) {
 			try {
 				empacotar();
 				Main.empty.acquire();
