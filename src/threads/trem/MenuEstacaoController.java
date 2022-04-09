@@ -86,17 +86,17 @@ public class MenuEstacaoController implements Initializable {
         	Scene scene = new Scene(root, 500, 420);
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-            Stage stage = new Stage();
-            stage.setTitle("Projeto: Estação");
-            stage.setScene(scene);
-            stage.setResizable(false);
+            Stage menuInicialStage = new Stage();
+            menuInicialStage.setTitle("Projeto: Estação");
+            menuInicialStage.setScene(scene);
+            menuInicialStage.setResizable(false);
             
-            stage.setOnCloseRequest(closeEvent -> {
+            menuInicialStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
-				Main.fecharJogo(stage);
+				Main.fecharJogo(menuInicialStage);
 			});
             
-            stage.show();
+            menuInicialStage.show();
             sair(event);
         }
         catch (IOException e) {
@@ -156,48 +156,28 @@ public class MenuEstacaoController implements Initializable {
         	Scene scene = new Scene(root, 900, 460);
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-            Stage stage = new Stage();
-            stage.setTitle("Projeto: Estação");
-            stage.setScene(scene);
-            stage.setResizable(false);
+            Stage telaEstacaoStage = new Stage();
+            telaEstacaoStage.setTitle("Projeto: Estação");
+            telaEstacaoStage.setScene(scene);
+            telaEstacaoStage.setResizable(false);
             
-            stage.setOnCloseRequest(closeEvent -> {
+            telaEstacaoStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
-				Main.fecharJogo(stage);
+				Main.fecharJogo(telaEstacaoStage);
 			});
             
-            stage.show();
+            telaEstacaoStage.show();
             sair(event);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
 	}
-	
 
-	@FXML
 	private void sair(ActionEvent event) {
 		stage = (Stage) telaMenuEstacao.getScene().getWindow();
-		
-		boolean empacotadoresAtivos = true;
-		boolean tremAtivo = true;
-		Main.encerrarThreads = true;
-		
-		System.out.println("Encerrando threads");
-		while (empacotadoresAtivos || tremAtivo) {
-			if(tremAtivo) {
-				tremAtivo = (Main.tremDeCarga != null && Main.tremDeCarga.isAlive());
-			}
-			if(empacotadoresAtivos) {
-				for (int i = 0; i < 10; i++) {
-					empacotadoresAtivos = (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive());
-					if (empacotadoresAtivos) break;
-				}
-			}
-		}
-		System.out.println("Threads encerradas");
-		
-		stage.close();
+
+		Main.fecharJogo(stage);
 	}
 	
 	@FXML

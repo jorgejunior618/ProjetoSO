@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 public class TelaEstacaoController implements Initializable {
-	private Image imagemEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));
+	private Image imagemEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/packer_mod.png"));
 	
 	private ImageView[] empacotadores = new ImageView[10];
 
@@ -54,9 +54,10 @@ public class TelaEstacaoController implements Initializable {
 		
 		String nome = String.format("Empacotador %d", Main.qtdEmpacotadores+1);
 		Main.empacotadores[Main.qtdEmpacotadores] = new Empacotador(
-			Main.qtdEmpacotadores,
+			Main.identificadorPrimeiroEmpacotador,
 			nome,
-			Main.tempoEmpacotamentoInicial, this
+			Main.tempoEmpacotamentoInicial,
+			this
 		);
 		
 		Main.empacotadores[Main.qtdEmpacotadores].start();
@@ -143,31 +144,31 @@ public class TelaEstacaoController implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		int i;
-
 		Main.tremDeCarga = new Trem(
 			1,
-			Main.cargaMaximaDeposito,
+			Main.tempoViagemInicial,
+			Main.nomeTrem,
 			this
 		);
 		Main.tremDeCarga.start();
+
+//		progressoCaminhoTrem.getStyleClass().add("blue-bar");
+
+		empacotadores[0] = new ImageView(imagemEmpacotador);
+
+		empacotadores[0].setLayoutX(52);		// FALTA CONFIGURAR
+		empacotadores[0].setLayoutY(113);		// FALTA CONFIGURAR
+			
+		mainPane.getChildren().add(empacotadores[0]);
 		
-//		progressoPane.setVisible(false);
-//		progressoCaminhoTrem.setProgress(0.5);
-		progressoCaminhoTrem.getStyleClass().add("blue-bar");
-		for (i = 0; i < Main.qtdEmpacotadores; i++) {
-			empacotadores[i] = new ImageView(imagemEmpacotador);
-			
-			empacotadores[i].setLayoutX(52 + (46 * (i % 5)));
-			empacotadores[i].setLayoutY(113 + ((int) i / 5) * 20);
-				
-			mainPane.getChildren().add(empacotadores[i]);
-			
-			String nome = String.format("Empacotador %d", i+1);
-			Main.empacotadores[i] = new Empacotador(i, nome, Main.tempoEmpacotamentoInicial, this);
-			
-			Main.empacotadores[i].start();
-		}
+		Main.empacotadores[0] = new Empacotador(
+			Main.identificadorPrimeiroEmpacotador,
+			Main.nomePrimeiroEmpacotador,
+			Main.tempoEmpacotamentoInicial,
+			this
+		);
+		
+		Main.empacotadores[0].start();
 	}
 	
 }

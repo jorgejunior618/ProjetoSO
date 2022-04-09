@@ -38,6 +38,7 @@ public class Main extends Application {
 	public static int cargaDeposito = 0;
 	
 	public static void fecharJogo(Stage stage) {
+		long inicio = System.currentTimeMillis();
 		boolean empacotadoresAtivos = true;
 		boolean tremAtivo = true;
 		Main.encerrarThreads = true;
@@ -53,6 +54,19 @@ public class Main extends Application {
 					if (empacotadoresAtivos) break;
 				}
 			}
+			
+			if(System.currentTimeMillis() - inicio > 2000) {
+				Main.tremDeCarga.stop();
+				
+				for (int i = 0; i < 10; i++) {
+					if (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive()) {
+						Main.empacotadores[i].stop();
+					}
+				}
+				break;
+			}
+			
+			
 		}
 		System.out.println("Threads encerradas");
 		

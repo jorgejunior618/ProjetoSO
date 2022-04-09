@@ -9,8 +9,8 @@ public class Trem extends Thread {
 	public Trem(int id, int tt, String nome, TelaEstacaoController controller) {
 		super(nome);
 		this.id = id;
-		this.nome = nome;
 		this.tempoTransporte = tt;
+		this.nome = nome;
 		this.controller = controller;
 		
 	}
