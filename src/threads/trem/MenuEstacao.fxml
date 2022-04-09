@@ -34,18 +34,21 @@
                                     <Image url="@assets/station-closeup.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="7.0" layoutY="204.0" text="Capacidade do Depósito">
+                              <Label layoutX="14.0" layoutY="213.0" text="Capacidade do Depósito">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="capacidadeDeposito" layoutX="340.0" layoutY="200.0" prefHeight="23.0" prefWidth="144.0" promptText="Quantidade de Caixas" />
-                              <Button fx:id="proximoEstacao" layoutX="429.0" layoutY="277.0" mnemonicParsing="false" onAction="#irParaTrem" text="Próximo">
+                              <TextField fx:id="capacidadeDeposito" layoutX="335.0" layoutY="205.0" prefHeight="30.0" prefWidth="150.0" promptText="nº Caixas">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></TextField>
+                              <Button fx:id="proximoEstacao" layoutX="335.0" layoutY="269.0" mnemonicParsing="false" onAction="#irParaTrem" prefHeight="30.0" prefWidth="150.0" text="Próximo" textAlignment="JUSTIFY">
                                  <font>
                                     <Font name="Press Start K" size="11.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="menuEstacao" layoutX="14.0" layoutY="277.0" mnemonicParsing="false" onAction="#voltarParaMenu" text="Menu">
+                              <Button fx:id="menuEstacao" layoutX="14.0" layoutY="269.0" mnemonicParsing="false" onAction="#voltarParaMenu" prefHeight="30.0" prefWidth="150.0" text="Menu">
                                  <font>
                                     <Font name="Press Start K" size="11.0" />
                                  </font>
@@ -58,35 +61,44 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
+                              <TextField fx:id="capacidadeTrem" layoutX="335.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" promptText="nº Caixas">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></TextField>
                               <ImageView fitHeight="90.0" fitWidth="345.0" layoutX="70.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@assets/train_mod.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="14.0" layoutY="119.0" text="Nome do Trem">
+                              <Label layoutX="14.0" layoutY="133.0" text="Nome do Trem">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="160.0" text="Capacidade de Carga">
+                              <Label layoutX="14.0" layoutY="173.0" text="Capacidade de Carga">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="202.0" text="Tempo de Viagem">
+                              <Label layoutX="14.0" layoutY="213.0" text="Tempo de Viagem">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nomeTrem" layoutX="340.0" layoutY="114.0" promptText="Nome do Trem" />
-                              <TextField fx:id="capacidadeTrem" layoutX="340.0" layoutY="155.0" promptText="Capacidade em Kg" />
-                              <TextField fx:id="velocidadeTrem" layoutX="340.0" layoutY="197.0" promptText="Duração em segundos" />
-                              <Button fx:id="proximoTrem" layoutX="431.0" layoutY="277.0" mnemonicParsing="false" onAction="#irParaEmpacotador" text="Próximo">
+                              <TextField fx:id="nomeTrem" layoutX="335.0" layoutY="125.0" prefHeight="30.0" prefWidth="150.0">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></TextField>
+                              <TextField fx:id="velocidadeTrem" layoutX="335.0" layoutY="205.0" prefHeight="30.0" prefWidth="150.0" promptText="Duração (seg)">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></TextField>
+                              <Button fx:id="proximoTrem" layoutX="335.0" layoutY="269.0" mnemonicParsing="false" onAction="#irParaEmpacotador" prefHeight="30.0" prefWidth="150.0" text="Próximo">
                                  <font>
                                     <Font name="Press Start K" size="11.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="voltarTrem" layoutX="14.0" layoutY="277.0" mnemonicParsing="false" onAction="#irParaEstacao" text="Voltar">
+                              <Button fx:id="voltarTrem" layoutX="14.0" layoutY="269.0" mnemonicParsing="false" onAction="#irParaEstacao" prefHeight="30.0" prefWidth="150.0" text="Voltar">
                                  <font>
                                     <Font name="Press Start K" size="11.0" />
                                  </font>
@@ -104,30 +116,40 @@
                                     <Image url="@assets/packer_mod.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="14.0" layoutY="132.0" text="Nome do Empacotador">
+                              <Label layoutX="14.0" layoutY="140.0" text="Nome do Empacotador">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="169.0" text="ID do Empacotador">
+                              <TextField fx:id="nomeEmpacotador" layoutX="335.0" layoutY="125.0" prefHeight="30.0" prefWidth="150.0">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="14.0" layoutY="173.0" text="ID do Empacotador">
+                                 <font>
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="208.0" text="Tempo de Empacotamento">
+                              <TextField fx:id="idEmpacotador" layoutX="335.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" promptText="Identificador">
                                  <font>
-                                    <Font name="Press Start K" size="12.0" />
+                                    <Font size="10.0" />
+                                 </font></TextField>
+                              <Label layoutX="14.0" layoutY="213.0" text="Tempo de Empacotamento">
+                                 <font>
+                                    <Font size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nomeEmpacotador" layoutX="336.0" layoutY="127.0" prefHeight="25.6" prefWidth="149.6" promptText="Nome do Empacotador" />
-                              <TextField fx:id="idEmpacotador" layoutX="336.0" layoutY="164.0" promptText="ID do Empacotador" />
-                              <TextField fx:id="velocidadeEmpacotador" layoutX="336.0" layoutY="203.0" promptText="Duração em segundos" />
-                              <Button fx:id="finalizar" layoutX="431.0" layoutY="277.0" mnemonicParsing="false" onAction="#finalizar" text="Finalizar">
+                              <TextField fx:id="velocidadeEmpacotador" layoutX="335.0" layoutY="205.0" prefHeight="30.0" prefWidth="150.0" promptText="Duração (seg)">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></TextField>
+                              <Button fx:id="finalizar" layoutX="335.0" layoutY="269.0" mnemonicParsing="false" onAction="#finalizar" prefHeight="30.0" prefWidth="150.0" text="Finalizar">
                                  <font>
                                     <Font name="Press Start K" size="11.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="voltarEmpacotador" layoutX="14.0" layoutY="277.0" mnemonicParsing="false" onAction="#irParaTrem" text="Voltar">
+                              <Button fx:id="voltarEmpacotador" layoutX="14.0" layoutY="269.0" mnemonicParsing="false" onAction="#irParaTrem" prefHeight="30.0" prefWidth="150.0" text="Voltar">
                                  <font>
                                     <Font name="Press Start K" size="11.0" />
                                  </font>

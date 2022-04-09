@@ -1,4 +1,5 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .blue-bar  {
   -fx-accent: orange;
   -fx-padding: 0;
@@ -13,4 +14,8 @@
 .blue-bar > .track {
   -fx-text-box-border: blue;
   -fx-control-inner-background: blue;
+}
+
+* {
+  -fx-font-family: 'Press Start 2P', cursive;
 }

@@ -9,24 +9,24 @@
    <children>
       <AnchorPane prefHeight="420.0" prefWidth="500.0">
          <children>
-            <Label layoutX="58.0" layoutY="80.0" text="Projeto: Estação">
+            <Label layoutX="14.0" layoutY="34.0" text="Projeto: Estação">
                <font>
-                  <Font name="Press Start Regular" size="24.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
             <Button fx:id="botaoNovoJogo" layoutX="168.0" layoutY="210.0" mnemonicParsing="false" onAction="#iniciarJogo" prefHeight="26.0" prefWidth="164.0" text="Novo Jogo" textAlignment="CENTER">
                <font>
-                  <Font name="Press Start K" size="12.0" />
+                  <Font name="Pixeboy" size="13.0" />
                </font>
             </Button>
             <Button fx:id="botaoCriativo" layoutX="168.0" layoutY="283.0" mnemonicParsing="false" onAction="#iniciarJogoCriativo" prefHeight="26.0" prefWidth="164.0" text="Criativo" textAlignment="CENTER">
                <font>
-                  <Font name="Press Start K" size="12.0" />
+                  <Font name="Pixeboy" size="13.0" />
                </font>
             </Button>
             <Button fx:id="botaoSair" layoutX="168.0" layoutY="356.0" mnemonicParsing="false" onAction="#sair" prefHeight="26.0" prefWidth="164.0" text="Sair" textAlignment="CENTER">
                <font>
-                  <Font name="Press Start K" size="12.0" />
+                  <Font name="Pixeboy" size="13.0" />
                </font>
             </Button>
          </children>

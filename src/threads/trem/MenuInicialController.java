@@ -42,11 +42,11 @@ public class MenuInicialController implements Initializable {
 		// Empacotadores
 		Main.tempoEmpacotamentoInicial = 10;
 		Main.nomePrimeiroEmpacotador = "Robervaldo";
-		Main.identificadorPrimeiroEmpacotador = "Empacotador Padrão";
+		Main.identificadorPrimeiroEmpacotador = "Empacotador Padrï¿½o";
 		
 		// Trem
 		Main.tempoViagemInicial = 45;
-		Main.nomeTrem = "Estação Inicial";
+		Main.nomeTrem = "Estaï¿½ï¿½o Inicial";
 		Main.empty = new Semaphore(15);
 		
 		BorderPane root;
@@ -57,7 +57,7 @@ public class MenuInicialController implements Initializable {
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             Stage telaEstacaoStage = new Stage();
-            telaEstacaoStage.setTitle("Projeto: Estação");
+            telaEstacaoStage.setTitle("Projeto: Estaï¿½ï¿½o");
             telaEstacaoStage.setScene(scene);
             telaEstacaoStage.setResizable(false);
 
@@ -86,7 +86,7 @@ public class MenuInicialController implements Initializable {
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             Stage menuEstacaoStage = new Stage();
-            menuEstacaoStage.setTitle("Projeto: Estação");
+            menuEstacaoStage.setTitle("Projeto: Estaï¿½ï¿½o");
             menuEstacaoStage.setScene(scene);
             menuEstacaoStage.setResizable(false);
             
