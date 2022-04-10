@@ -40,13 +40,13 @@ public class MenuInicialController implements Initializable {
 
 		// Campos para inicalizar a thread
 		// Empacotadores
-		Main.tempoEmpacotamentoInicial = 10;
+		Main.tempoEmpacotamentoInicial = 2; // 10
 		Main.nomePrimeiroEmpacotador = "Robervaldo";
-		Main.identificadorPrimeiroEmpacotador = "Empacotador Padr�o";
+		Main.identificadorPrimeiroEmpacotador = "Empacotador Padrao";
 		
 		// Trem
-		Main.tempoViagemInicial = 45;
-		Main.nomeTrem = "Esta��o Inicial";
+		Main.tempoViagemInicial = 15; // 45
+		Main.nomeTrem = "Estacao Inicial";
 		Main.empty = new Semaphore(15);
 		
 		BorderPane root;
@@ -57,13 +57,13 @@ public class MenuInicialController implements Initializable {
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             Stage telaEstacaoStage = new Stage();
-            telaEstacaoStage.setTitle("Projeto: Esta��o");
+            telaEstacaoStage.setTitle("Projeto: Estacao");
             telaEstacaoStage.setScene(scene);
             telaEstacaoStage.setResizable(false);
 
             telaEstacaoStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
-				Main.fecharJogo(telaEstacaoStage);
+				Main.fecharJogo(telaEstacaoStage, true);
 			});
             
             telaEstacaoStage.show();
@@ -86,13 +86,13 @@ public class MenuInicialController implements Initializable {
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             Stage menuEstacaoStage = new Stage();
-            menuEstacaoStage.setTitle("Projeto: Esta��o");
+            menuEstacaoStage.setTitle("Projeto: Estacao");
             menuEstacaoStage.setScene(scene);
             menuEstacaoStage.setResizable(false);
             
             menuEstacaoStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
-				Main.fecharJogo(menuEstacaoStage);
+				Main.fecharJogo(menuEstacaoStage, false);
 			});
             
             menuEstacaoStage.show();
@@ -107,7 +107,7 @@ public class MenuInicialController implements Initializable {
 	private void sair(ActionEvent event) {
 		stage = (Stage) telaMenuInicial.getScene().getWindow();
 		
-		Main.fecharJogo(stage);
+		Main.fecharJogo(stage, false);
 	}
 
 	@Override

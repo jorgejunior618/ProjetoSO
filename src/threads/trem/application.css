@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-.blue-bar  {
+/* .blue-bar  {
   -fx-accent: orange;
   -fx-padding: 0;
   -fx-background-insets: 0; 
@@ -10,7 +10,7 @@
   -fx-padding: 0;
   -fx-background-insets: 0; 
 }
- 
+ */ 
 .blue-bar > .track {
   -fx-text-box-border: blue;
   -fx-control-inner-background: blue;

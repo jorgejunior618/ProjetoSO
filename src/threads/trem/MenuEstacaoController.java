@@ -93,7 +93,7 @@ public class MenuEstacaoController implements Initializable {
             
             menuInicialStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
-				Main.fecharJogo(menuInicialStage);
+				Main.fecharJogo(menuInicialStage, false);
 			});
             
             menuInicialStage.show();
@@ -163,7 +163,7 @@ public class MenuEstacaoController implements Initializable {
             
             telaEstacaoStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
-				Main.fecharJogo(telaEstacaoStage);
+				Main.fecharJogo(telaEstacaoStage, true);
 			});
             
             telaEstacaoStage.show();
@@ -177,7 +177,7 @@ public class MenuEstacaoController implements Initializable {
 	private void sair(ActionEvent event) {
 		stage = (Stage) telaMenuEstacao.getScene().getWindow();
 
-		Main.fecharJogo(stage);
+		Main.fecharJogo(stage, false);
 	}
 	
 	@FXML

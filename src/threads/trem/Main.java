@@ -37,38 +37,40 @@ public class Main extends Application {
 
 	public static int cargaDeposito = 0;
 	
-	public static void fecharJogo(Stage stage) {
-		long inicio = System.currentTimeMillis();
-		boolean empacotadoresAtivos = true;
-		boolean tremAtivo = true;
-		Main.encerrarThreads = true;
-		
-		System.out.println("Encerrando threads");
-		while (empacotadoresAtivos || tremAtivo) {
-			if(tremAtivo) {
-				tremAtivo = (Main.tremDeCarga != null && Main.tremDeCarga.isAlive());
-			}
-			if(empacotadoresAtivos) {
-				for (int i = 0; i < 10; i++) {
-					empacotadoresAtivos = (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive());
-					if (empacotadoresAtivos) break;
-				}
-			}
+	public static void fecharJogo(Stage stage, boolean encerrarTreads) {		
+		if (encerrarTreads) {
+			long inicio = System.currentTimeMillis();
+			boolean empacotadoresAtivos = true;
+			boolean tremAtivo = true;
+			Main.encerrarThreads = true;
 			
-			if(System.currentTimeMillis() - inicio > 2000) {
-				Main.tremDeCarga.stop();
-				
-				for (int i = 0; i < 10; i++) {
-					if (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive()) {
-						Main.empacotadores[i].stop();
+			System.out.println("Encerrando threads");
+			while (empacotadoresAtivos || tremAtivo) {
+				if(tremAtivo) {
+					tremAtivo = (Main.tremDeCarga != null && Main.tremDeCarga.isAlive());
+				}
+				if(empacotadoresAtivos) {
+					for (int i = 0; i < 10; i++) {
+						empacotadoresAtivos = (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive());
+						if (empacotadoresAtivos) break;
 					}
 				}
-				break;
+				
+				if(System.currentTimeMillis() - inicio > 2000) {
+					Main.tremDeCarga.interrupt();
+					
+					for (int i = 0; i < 10; i++) {
+						if (Main.empacotadores[i] != null && Main.empacotadores[i].isAlive()) {
+							Main.empacotadores[i].interrupt();
+						}
+					}
+					break;
+				}
+				
+				
 			}
-			
-			
+			System.out.println("Threads encerradas");
 		}
-		System.out.println("Threads encerradas");
 		
 		stage.close();
 	}
@@ -84,7 +86,7 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.setOnCloseRequest(event -> {
 				event.consume();
-				fecharJogo(primaryStage);
+				fecharJogo(primaryStage, false);
 			});
 			
 			primaryStage.show();

@@ -1,7 +1,7 @@
 package threads.trem;
 
 public class Empacotador extends Thread {
-	private int ultimoId = 0;
+	private static int ultimoId = 0;
 	private int id;
 	public String identificador;
 	public String nome;
@@ -11,7 +11,7 @@ public class Empacotador extends Thread {
 	public Empacotador(String id, String nome, int te, TelaEstacaoController cont) {
 		super(nome);
 		
-		this.id = ultimoId++;
+		this.id = Empacotador.ultimoId++;
 		this.identificador = id;
 		this.tempoEmpacotamento = te;
 		this.nome = nome;
@@ -19,6 +19,7 @@ public class Empacotador extends Thread {
 	}
 
 	private void empacotar() {
+		System.out.println(getName() + " " + Integer.toString(id));
 		long inicio = System.currentTimeMillis();
 		
 		this.controller.comecarTrabalhoEmpacotador(this.id);
@@ -31,18 +32,18 @@ public class Empacotador extends Thread {
 		this.controller.entregarPacoteEmpacotador(this.id);
 
 		long inicio = System.currentTimeMillis();
-		while(System.currentTimeMillis() - inicio  < 500 && !Main.encerrarThreads) {
+		while(System.currentTimeMillis() - inicio  < 500) {
 		}
 	}
 
 	private void inserirPacote() {
 		Main.cargaDeposito += 1;
-
 		if (Main.cargaDeposito == Main.cargaMaximaVagao) {
 			Main.full.release();
 		} else if (Main.cargaDeposito > Main.cargaMaximaVagao && Main.full.availablePermits() == 0) {
 			Main.full.release();
 		}
+		System.out.println("Pacote Inserido");
 
 		this.controller.mudaTextoQtdPacotes();
 	}
@@ -51,7 +52,7 @@ public class Empacotador extends Thread {
 		long inicio = System.currentTimeMillis();
 
 		this.controller.voltarAoTrabalhoEmpacotador(id);
-		while(System.currentTimeMillis() - inicio  < 500 && !Main.encerrarThreads) {
+		while(System.currentTimeMillis() - inicio  < 500) {
 		}
 	}
 

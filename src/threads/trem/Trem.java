@@ -21,14 +21,14 @@ public class Trem extends Thread {
 		long tempoCorrido = 0;
 
 		double progresso = 0.000000;
-		this.controller.atualizarProgressoTrem(progresso);
+		//this.controller.atualizarProgressoTrem(progresso);
 		while(tempoCorrido < (long) tempoTransporte * 500 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 			
 			int andamento = (int) tempoCorrido * 2 / (tempoTransporte * 1);
 			if (andamento  / 1000.0 != progresso) {
 				progresso = andamento / 1000.0;
-				this.controller.atualizarProgressoTrem(progresso);
+				//this.controller.atualizarProgressoTrem(progresso);
 			}
 		}
 	}
@@ -43,7 +43,7 @@ public class Trem extends Thread {
 			int andamento = (tempoTransporte * 200) - (int) tempoCorrido * 2 / (tempoTransporte*1);
 			if (andamento  / 1000.0 != progresso) {
 				progresso = andamento / 1000.0;
-				this.controller.atualizarProgressoTrem(progresso);
+				//this.controller.atualizarProgressoTrem(progresso);
 			}
 		}
 		this.controller.chegaNaEstacaoTrem();
@@ -53,7 +53,7 @@ public class Trem extends Thread {
 			int andamento =  (tempoTransporte * 200) -  (int) tempoCorrido * 2 /(tempoTransporte*1);
 			if (andamento / 1000.0 != progresso) {
 				progresso = andamento / 1000.0;
-				this.controller.atualizarProgressoTrem(progresso);
+				//this.controller.atualizarProgressoTrem(progresso);
 			}
 		}
 		
@@ -63,10 +63,8 @@ public class Trem extends Thread {
 	private void transportar() {
 		long inicio = System.currentTimeMillis();
 		this.controller.sairParaEntregaTrem();
-//		this.controller.iniciarTrajetoMiniTrem();
 		ida(inicio);
 
-//		this.controller.retornarTrajetoMiniTrem();
 		volta(inicio);
 	}
 
