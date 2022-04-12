@@ -20,6 +20,7 @@ public class Main extends Application {
 	// Campos para inicalizar a thread
 	// Empacotadores
 	public static boolean contratoAceito;
+	public static int idEmpacotadorAlterado;
 	public static int tempoEmpacotamento;
 	public static String nomeEmpacotador;
 	public static String identificadorEmpacotador;
@@ -28,8 +29,9 @@ public class Main extends Application {
 	public static int tempoViagemInicial;
 	public static String nomeTrem;
 	
-	public static ModoJogo modoJogo;
-
+	// Estacao
+	public static int cargaMaximaDepositoAlterada;
+	
 	public static Semaphore empty;
 	public static Semaphore full = new Semaphore(0);
 
@@ -37,8 +39,9 @@ public class Main extends Application {
 
 	public static int cargaDeposito = 0;
 		
-	public static int qtmoedas = 0;			//Variavel que guarda as moedas atuais.
-	
+	public static int qtmoedas = 999;			//Variavel que guarda as moedas atuais.
+	public static ModoJogo modoJogo;
+	public static TipoMelhoria melhoria = TipoMelhoria.NENHUMA;
 	public static Sound musica;
 	
 	public static void fecharJogo(Stage stage, boolean encerrarTreads) {		

@@ -44,7 +44,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </TextField>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="204.0" mnemonicParsing="false" onAction="#diminuirCargaDeposito" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
@@ -57,7 +57,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </TextField>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="204.0" mnemonicParsing="false" onAction="#aumentarCargaDeposito" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
@@ -67,7 +67,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="botaoMelhorarTrem1" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
+                              <Button fx:id="botaoMelhorarDeposito" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" onAction="#melhorarEstacao" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
@@ -115,11 +115,11 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </TextField>
-                              <Button contentDisplay="CENTER" layoutX="495.0" layoutY="164.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
+                              <Button contentDisplay="CENTER" layoutX="495.0" layoutY="164.0" mnemonicParsing="false" onAction="#aumentarCargaTrem" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
-                              <Button contentDisplay="CENTER" layoutX="495.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
+                              <Button contentDisplay="CENTER" layoutX="495.0" layoutY="204.0" mnemonicParsing="false" onAction="#aumentarTempoViagemTrem" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
@@ -127,12 +127,12 @@
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Label>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="164.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="164.0" mnemonicParsing="false" onAction="#diminuirCargaTrem" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="204.0" mnemonicParsing="false" onAction="#diminuirTempoViagemTrem" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
@@ -142,7 +142,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </TextField>
-                              <Button fx:id="botaoMelhorarTrem" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
+                              <Button fx:id="botaoMelhorarTrem" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" onAction="#melhorarTrem" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
@@ -175,7 +175,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nomeEmpacotadoer" editable="false" layoutX="260.0" layoutY="124.0" prefHeight="30.0" prefWidth="172.0" promptText="Nome">
+                              <TextField fx:id="nomeEmpacotador" disable="true" editable="false" layoutX="260.0" layoutY="124.0" prefHeight="30.0" prefWidth="265.0" promptText="Nome">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
@@ -185,7 +185,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="identificadorEmpacotador" editable="false" layoutX="260.0" layoutY="164.0" prefHeight="30.0" prefWidth="172.0" promptText="Identificador">
+                              <TextField fx:id="identificadorEmpacotador" disable="true" editable="false" layoutX="260.0" layoutY="164.0" prefHeight="30.0" prefWidth="265.0" promptText="Identificador">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
@@ -200,7 +200,7 @@
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </TextField>
-                              <Button fx:id="botaoMelhorarEmpacotador" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
+                              <Button fx:id="botaoMelhorarEmpacotador" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" onAction="#melhorarEmpacotador" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
@@ -208,7 +208,7 @@
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
-                              <Button layoutX="450.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-">
+                              <Button layoutX="450.0" layoutY="204.0" mnemonicParsing="false" onAction="#diminuirTempoEmpacotamento" prefHeight="30.0" prefWidth="30.0" text="-">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
@@ -220,7 +220,7 @@
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></TextField>
-                              <Button layoutX="410.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Demitir" textAlignment="CENTER" textFill="#cf1111">
+                              <Button layoutX="410.0" layoutY="320.0" mnemonicParsing="false" onAction="#demitirEmpacotador" prefHeight="30.0" prefWidth="115.0" text="Demitir" textAlignment="CENTER" textFill="#cf1111">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Button>
@@ -236,17 +236,17 @@
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font></Label>
-                              <Button layoutX="495.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+">
+                              <Button layoutX="495.0" layoutY="204.0" mnemonicParsing="false" onAction="#aumentarTempoEmpacotamento" prefHeight="30.0" prefWidth="30.0" text="+">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="432.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="&lt;">
+                              <Button layoutX="432.0" layoutY="75.0" mnemonicParsing="false" onAction="#empacotadorAnterior" prefHeight="30.0" prefWidth="30.0" text="&lt;">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="477.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="&gt;">
+                              <Button layoutX="477.0" layoutY="75.0" mnemonicParsing="false" onAction="#proximoEmpacotador" prefHeight="30.0" prefWidth="30.0" text="&gt;">
                                  <font>
                                     <Font name="Press Start 2P Regular" size="10.0" />
                                  </font>

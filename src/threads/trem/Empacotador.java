@@ -18,17 +18,25 @@ public class Empacotador extends Thread {
 		this.controller = cont;
 	}
 
+	/**
+	 * Função de temporizar o tempo de empacotamento dedfinido para o empacotador
+	 */
 	private void empacotar() {
-		System.out.println(getName() + " " + Integer.toString(id));
+		System.out.println(getName() + ": Começou a empacotar");
 		long inicio = System.currentTimeMillis();
 		
 		this.controller.comecarTrabalhoEmpacotador(this.id);
 		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500 && !Main.encerrarThreads) {
 		}
 		this.controller.ficarProntoEmpacotador(this.id);
+		System.out.println(getName() + ": Terminou de empacotar");
 	}
 
+	/**
+	 * Função para chamar a animação de ir deixar o pacote na posição do depósito
+	 */
 	private void deixarPacote() throws InterruptedException {
+		System.out.println(getName() + ": Foi guardar pacote");
 		this.controller.entregarPacoteEmpacotador(this.id);
 
 		long inicio = System.currentTimeMillis();
@@ -36,6 +44,9 @@ public class Empacotador extends Thread {
 		}
 	}
 
+	/**
+	 * Função para incrementar o valor total de pacotes no depósito
+	 */
 	private void inserirPacote() {
 		Main.cargaDeposito += 1;
 		if (Main.cargaDeposito == Main.cargaMaximaVagao) {
@@ -43,11 +54,14 @@ public class Empacotador extends Thread {
 		} else if (Main.cargaDeposito > Main.cargaMaximaVagao && Main.full.availablePermits() == 0) {
 			Main.full.release();
 		}
-		System.out.println("Pacote Inserido");
+		System.out.printf("Pacote Inserido, total de pacotes: %d\n", Main.cargaDeposito);
 
 		this.controller.mudaTextoQtdPacotes();
 	}
-
+	
+	/**
+	 * Função para chamar a animação de voltar a posição inicial
+	 */
 	private void voltarAoPosto() throws InterruptedException {
 		long inicio = System.currentTimeMillis();
 
