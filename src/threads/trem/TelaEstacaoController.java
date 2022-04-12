@@ -29,6 +29,9 @@ public class TelaEstacaoController implements Initializable {
 
 	@FXML
 	private MenuItem menuMusica;
+	
+	@FXML
+	private MenuItem menuLogs;
 
 	@FXML
 	private TextField qtdPacotes;
@@ -61,6 +64,17 @@ public class TelaEstacaoController implements Initializable {
 		} else {
 			Main.musica.tocarMusica();
 			menuMusica.setText("Desligar música");
+		}
+	}
+	
+	@FXML
+	public void logLigarDesligar(ActionEvent event) {
+		if (Log.getAtivado()) {
+			Log.setAtivado(false);
+			menuLogs.setText("Desligar Log");
+		} else {
+			Log.setAtivado(true);
+			menuLogs.setText("Ligar Log");
 		}
 	}
 
@@ -169,7 +183,13 @@ public class TelaEstacaoController implements Initializable {
 	}
 	
 	public void alteraTextoMoedas() {
-		qtdMoedas.setText(Integer.toString(Main.qtmoedas));
+		if(Main.modoJogo == ModoJogo.DESAFIO){
+			qtdMoedas.setText(Integer.toString(Main.qtmoedas));
+		}
+		else {
+			qtdMoedas.setText(Character.toString('\u221E'));
+			
+		}
 	}
 	/* ----------- MÉTODOS DE ANIMAÇÃO: EMPACOTADOR ----------- */
 
@@ -268,8 +288,9 @@ public class TelaEstacaoController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		alteraTextoMoedas();
+
 		avisaCapacidade();
-    qtdMoedas.setText(Integer.toString(Main.qtmoedas));
 		Main.tremDeCarga = new Trem(
 			1,
 			Main.tempoViagemInicial,
@@ -296,6 +317,7 @@ public class TelaEstacaoController implements Initializable {
 		Main.tremDeCarga.start();
 		Main.empacotadores[0].start();
 		menuMusica.setText("Desligar música");
+		menuLogs.setText("Desligar Log");
 //		Main.musica.tocarMusica();
 	}
 	

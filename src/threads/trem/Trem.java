@@ -28,7 +28,9 @@ public class Trem extends Thread {
 	
 	private void volta(long inicio) {
 		avisaChegada();
-		Main.alterarQtMoedas(qtdPacotesTransporte);
+		if(Main.modoJogo == ModoJogo.DESAFIO) {
+			Main.alterarQtMoedas(qtdPacotesTransporte);	
+		}
 		this.controller.alteraTextoMoedas();
 		this.qtdPacotesTransporte = 0;
 		

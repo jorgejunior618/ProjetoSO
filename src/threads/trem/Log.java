@@ -13,6 +13,11 @@ public final class Log {
 		
 	}
 	
+	public static boolean getAtivado() {
+		return ativado;
+		
+	}
+	
 	public static String cabecalho() {
 		LocalDateTime periodo = LocalDateTime.now();
 		DateTimeFormatter formatacao = DateTimeFormatter.ofPattern("'['dd/MM/uuuu']' '['HH:mm:ss a']': ");
