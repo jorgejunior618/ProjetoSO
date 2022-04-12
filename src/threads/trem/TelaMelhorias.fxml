@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="telaMelhorias" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="threads.trem.TelaMelhoriasController">
+   <children>
+      <AnchorPane prefHeight="420.0" prefWidth="550.0">
+         <children>
+            <AnchorPane prefHeight="79.0" prefWidth="550.0" style="-fx-background-color: PINK;">
+               <children>
+                  <Label layoutX="194.0" layoutY="30.0" text="Melhorias" textAlignment="CENTER">
+                     <font>
+                        <Font name="Press Start 2P Regular" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TabPane fx:id="tabPaneMelhorias" layoutY="78.0" prefHeight="400.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="tabEstacao" text="Estação">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="161.0" fitWidth="181.0" layoutX="189.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/station-closeup.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="15.0" layoutY="213.0" text="Capacidade do Depósito">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="capacidadeDeposito" editable="false" layoutX="260.0" layoutY="204.0" prefHeight="30.0" prefWidth="172.0" promptText="Capacidade (kg)">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="204.0" mnemonicParsing="false" onAction="#diminuirCargaDeposito" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <Label layoutX="400.0" layoutY="280.0" text="Custo:">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Label>
+                              <TextField fx:id="custoDeposito" alignment="CENTER" editable="false" layoutX="480.0" layoutY="270.0" prefHeight="30.0" prefWidth="45.0" promptText="0">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="204.0" mnemonicParsing="false" onAction="#aumentarCargaDeposito" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="410.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Próximo">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="botaoMelhorarDeposito" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" onAction="#melhorarEstacao" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabTrem" text="Trem">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="capacidadeCargaTrem" editable="false" layoutX="260.0" layoutY="164.0" prefHeight="30.0" prefWidth="172.0" promptText="Capacidade (kg)">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <ImageView fitHeight="90.0" fitWidth="345.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/train_mod.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="15.0" layoutY="133.0" text="Nome do Trem">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="173.0" text="Capacidade de Carga">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="213.0" text="Tempo de Viagem">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nomeTrem" layoutX="260.0" layoutY="124.0" prefHeight="30.0" prefWidth="172.0" promptText="Nome">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="duracaoViagemTrem" editable="false" layoutX="260.0" layoutY="204.0" prefHeight="30.0" prefWidth="172.0" promptText="Duração (s)">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Button contentDisplay="CENTER" layoutX="495.0" layoutY="164.0" mnemonicParsing="false" onAction="#aumentarCargaTrem" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <Button contentDisplay="CENTER" layoutX="495.0" layoutY="204.0" mnemonicParsing="false" onAction="#aumentarTempoViagemTrem" prefHeight="30.0" prefWidth="30.0" text="+" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <Label layoutX="400.0" layoutY="280.0" text="Custo:">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Label>
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="164.0" mnemonicParsing="false" onAction="#diminuirCargaTrem" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="204.0" mnemonicParsing="false" onAction="#diminuirTempoViagemTrem" prefHeight="30.0" prefWidth="30.0" text="-" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="custoTrem" alignment="CENTER" layoutX="480.0" layoutY="270.0" prefHeight="30.0" prefWidth="45.0" promptText="0">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="botaoMelhorarTrem" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" onAction="#melhorarTrem" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="15.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Voltar">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="410.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Próximo">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabEmpacotador" text="Empacotador">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="111.0" fitWidth="73.0" layoutX="224.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/packer_mod.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="15.0" layoutY="134.0" text="Nome do Empacotador">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nomeEmpacotador" disable="true" editable="false" layoutX="260.0" layoutY="124.0" prefHeight="30.0" prefWidth="265.0" promptText="Nome">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="15.0" layoutY="174.0" text="ID do Empacotador">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="identificadorEmpacotador" disable="true" editable="false" layoutX="260.0" layoutY="164.0" prefHeight="30.0" prefWidth="265.0" promptText="Identificador">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="15.0" layoutY="214.0" text="Tempo de Empacotamento">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tempoEmpacotamentoEmpacotador" editable="false" layoutX="260.0" layoutY="204.0" prefHeight="30.0" prefWidth="172.0" promptText="Duração (s)">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="botaoMelhorarEmpacotador" layoutX="217.0" layoutY="320.0" mnemonicParsing="false" onAction="#melhorarEmpacotador" prefHeight="30.0" prefWidth="115.0" text="Melhorar" textFill="#267b30">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <Button layoutX="15.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="Voltar">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <Button layoutX="450.0" layoutY="204.0" mnemonicParsing="false" onAction="#diminuirTempoEmpacotamento" prefHeight="30.0" prefWidth="30.0" text="-">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <Label layoutX="400.0" layoutY="280.0" text="Custo:">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Label>
+                              <TextField fx:id="empacotadorAtual" alignment="CENTER" editable="false" layoutX="415.0" layoutY="36.0" prefHeight="30.0" prefWidth="40.0" text="1">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></TextField>
+                              <Button layoutX="410.0" layoutY="320.0" mnemonicParsing="false" onAction="#demitirEmpacotador" prefHeight="30.0" prefWidth="115.0" text="Demitir" textAlignment="CENTER" textFill="#cf1111">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Button>
+                              <TextField fx:id="totalEmpacotadores" alignment="CENTER" disable="true" editable="false" layoutX="485.0" layoutY="36.0" prefHeight="30.0" prefWidth="40.0" text="1">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></TextField>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="464.0" layoutY="46.0" text="/" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Label>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="388.0" layoutY="14.0" text="nº Empacotador" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font></Label>
+                              <Button layoutX="495.0" layoutY="204.0" mnemonicParsing="false" onAction="#aumentarTempoEmpacotamento" prefHeight="30.0" prefWidth="30.0" text="+">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="432.0" layoutY="75.0" mnemonicParsing="false" onAction="#empacotadorAnterior" prefHeight="30.0" prefWidth="30.0" text="&lt;">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="477.0" layoutY="75.0" mnemonicParsing="false" onAction="#proximoEmpacotador" prefHeight="30.0" prefWidth="30.0" text="&gt;">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="custoEmpacotador" alignment="CENTER" layoutX="480.0" layoutY="270.0" prefHeight="30.0" prefWidth="45.0" promptText="0">
+                                 <font>
+                                    <Font name="Press Start 2P Regular" size="10.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

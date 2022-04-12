@@ -1,108 +1,225 @@
 package threads.trem;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class TelaEstacaoController implements Initializable {
-	private Image imagemEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));
+	private Image imagemEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/packer_work.png"));
 	
 	private ImageView[] empacotadores = new ImageView[10];
 
 	@FXML
-	private AnchorPane mainPane;
-	
+	private BorderPane mainPane;
+
+	@FXML
+	private MenuItem menuMusica;
+
 	@FXML
 	private TextField qtdPacotes;
+
+	@FXML
+	private TextField qtdMoedas;
 	
 	@FXML
 	private ImageView tremEstacao;
-
-	@FXML
-	private AnchorPane progressoPane;
 	
-	@FXML
-	private ProgressBar progressoCaminhoTrem;
+	Stage stage;
 	
 	public void mudaTextoQtdPacotes() {
 		String novoTexto = String.format("%d", Main.cargaDeposito);
 		qtdPacotes.setText(novoTexto);
 	}
-	
-	/* ----------- MÉTODOS DE ANUIMAÇÃO: EMPACOTADOR ----------- */
+	/* ----------- MÉTODOS DE CONFIGURÇÃO ----------- */
+
+	@FXML
+	private void sair(ActionEvent event) {
+		stage = (Stage) mainPane.getScene().getWindow();
+		Main.fecharJogo(stage, true);
+	}
+
+	@FXML
+	private void musicaPausarIniciar(ActionEvent event) {
+		if (Main.musica.tocando) {
+			Main.musica.pararMusica();
+			menuMusica.setText("Ligar música");
+		} else {
+			Main.musica.tocarMusica();
+			menuMusica.setText("Desligar música");
+		}
+	}
 
 	@FXML
 	public void addEmpacotador() {
 		if(Main.qtdEmpacotadores >= 10) {
 			return;
 		}
-		empacotadores[Main.qtdEmpacotadores] = new ImageView(imagemEmpacotador);
 		
-		empacotadores[Main.qtdEmpacotadores].setLayoutX(52 + (46 * (Main.qtdEmpacotadores % 5)));
-		empacotadores[Main.qtdEmpacotadores].setLayoutY(113 + ((int) Main.qtdEmpacotadores / 5) * 20);
-		
-		mainPane.getChildren().add(empacotadores[Main.qtdEmpacotadores]);
-		
-		String nome = String.format("Empacotador %d", Main.qtdEmpacotadores+1);
-		Main.empacotadores[Main.qtdEmpacotadores] = new Empacotador(
-			Main.qtdEmpacotadores,
-			nome,
-			Main.tempoEmpacotamentoInicial, this
-		);
-		
-		Main.empacotadores[Main.qtdEmpacotadores].start();
-		Main.qtdEmpacotadores += 1;
+		AnchorPane root;
+        try {
+        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaContratarEmpacotador.fxml"));
+        	
+        	Scene scene = new Scene(root, 500, 426);
+        	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+            Stage telaAddEmpacotadorStage = new Stage();
+            telaAddEmpacotadorStage.setTitle("Projeto: Estacao");
+            telaAddEmpacotadorStage.setScene(scene);
+            telaAddEmpacotadorStage.setResizable(false);
+            
+
+            telaAddEmpacotadorStage.setOnCloseRequest(closeEvent -> {
+            	closeEvent.consume();
+            	Main.contratoAceito = false;
+				Main.fecharJogo(telaAddEmpacotadorStage, false);
+			});
+            
+            telaAddEmpacotadorStage.showAndWait();
+            
+            if (Main.contratoAceito) {            	
+        		empacotadores[Main.qtdEmpacotadores] = new ImageView(imagemEmpacotador);
+        		
+        		empacotadores[Main.qtdEmpacotadores].setFitWidth(30);
+        		empacotadores[Main.qtdEmpacotadores].setFitHeight(52);
+        		
+        		empacotadores[Main.qtdEmpacotadores].setLayoutX(75 + (45 * (Main.qtdEmpacotadores % 5)));
+        		empacotadores[Main.qtdEmpacotadores].setLayoutY(50 + ((int) Main.qtdEmpacotadores / 5) * 55);
+        		
+        		mainPane.getChildren().add(empacotadores[Main.qtdEmpacotadores]);
+        		
+        		Main.empacotadores[Main.qtdEmpacotadores] = new Empacotador(
+        			Main.identificadorEmpacotador,
+        			Main.nomeEmpacotador,
+        			Main.tempoEmpacotamento,
+        			this
+        		);
+        
+        		Main.empacotadores[Main.qtdEmpacotadores].start();
+        		Main.qtdEmpacotadores += 1;
+            } else {
+            	System.out.println(" ----------- CONTRATO Negado");
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        alteraTextoMoedas();
+	}
+
+	@FXML
+	public void realizarMelhorias() {
+		AnchorPane root;
+        try {
+        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaMelhorias.fxml"));
+        	
+        	Scene scene = new Scene(root, 550, 478);
+        	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+            Stage telaMelhoriasStage = new Stage();
+            telaMelhoriasStage.setTitle("Projeto: Estacao");
+            telaMelhoriasStage.setScene(scene);
+            telaMelhoriasStage.setResizable(false);
+
+            telaMelhoriasStage.setOnCloseRequest(closeEvent -> {
+            	closeEvent.consume();
+            	Main.melhoria = TipoMelhoria.NENHUMA;
+				Main.fecharJogo(telaMelhoriasStage, false);
+			});
+            
+            telaMelhoriasStage.showAndWait();
+            switch (Main.melhoria) {
+	            case ESTACAO:
+					int quantidadeAlterada = Main.cargaMaximaDepositoAlterada - Main.cargaMaximaDeposito;
+	            	for (int i = 0; i < quantidadeAlterada; i++) {
+	            		Main.empty.release();
+	            	}
+	            	Main.cargaMaximaDeposito += quantidadeAlterada;
+	            	break;
+	            case TREM:
+	            	Main.tremDeCarga.nome = Main.nomeTrem;
+	            	Main.tremDeCarga.tempoTransporte = Main.tempoViagemInicial;
+	            	break;
+				case EMPACOTADOR:
+	        		Main.empacotadores[Main.idEmpacotadorAlterado].tempoEmpacotamento = Main.tempoEmpacotamento;
+					break;
+				case NENHUMA:
+					break;
+			}
+            mostrarPropriedadesEstacao();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        alteraTextoMoedas();
 	}
 	
+	public void alteraTextoMoedas() {
+		qtdMoedas.setText(Integer.toString(Main.qtmoedas));
+	}
+	/* ----------- MÉTODOS DE ANIMAÇÃO: EMPACOTADOR ----------- */
+
 	public void comecarTrabalhoEmpacotador(int id) {
 		Image estadoEmpacotador;
-		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));
+		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/packer_work.png"));
 		empacotadores[id].setImage(estadoEmpacotador);
 	}
 	
 	public void ficarProntoEmpacotador(int id) {
 		Image estadoEmpacotador;
-		
-		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadorpronto.png"));
+		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/packer_ready.png"));
 		empacotadores[id].setImage(estadoEmpacotador);
 	}
 
 	public void entregarPacoteEmpacotador(int id) throws InterruptedException {
-		double posicaoInicial = empacotadores[id].getX();
+		double posicaoInicialX = empacotadores[id].getX();
+		double posicaoInicialY = empacotadores[id].getY();
 		
 		TranslateTransition translate = new TranslateTransition();
 		
 		translate.setNode(empacotadores[id]);
 		translate.setDuration(Duration.millis(450));
 
-		translate.setFromX(posicaoInicial);
-		translate.setToX(330 - 46 * (id % 5));
+		translate.setFromX(posicaoInicialX);
+		translate.setFromY(posicaoInicialY);
+		
+		translate.setToX(130 - 90 - (45 * (id % 5)));
+		translate.setToY(215 - 45 - ((int) id / 5) * 55);
 		
 		translate.play();
 	}
 
 	public void voltarAoTrabalhoEmpacotador(int id) throws InterruptedException {
 		Image estadoEmpacotador;
-		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/empacotadortrabalhando.png"));
-		double posicaoInicial = empacotadores[id].getX();
-
+		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/packer_ready.png"));
+		double posicaoInicialX = empacotadores[id].getX();
+		double posicaoInicialY = empacotadores[id].getY();
+		
 		empacotadores[id].setImage(estadoEmpacotador);
 		TranslateTransition translate = new TranslateTransition();
 		
 		translate.setNode(empacotadores[id]);
 		translate.setDuration(Duration.millis(450));
 
-		translate.setFromX(330 - 46 * (id % 5));
-		translate.setToX(posicaoInicial);
+		translate.setFromX(130 - 90 - (45 * (id % 5)));
+		translate.setFromY(215 - 45 - ((int) id / 5) * 55);
+		
+		translate.setToX(posicaoInicialX);
+		translate.setToY(posicaoInicialY);
 		
 		translate.play();
 	}
@@ -111,15 +228,14 @@ public class TelaEstacaoController implements Initializable {
 
 
 	public void sairParaEntregaTrem() {
-//		progressoPane.setVisible(true);
 		TranslateTransition translate = new TranslateTransition();
 		
 		translate.setNode(tremEstacao);
-		translate.setFromX(10);
+		translate.setFromX(0);
 
 		translate.setDuration(Duration.millis(2000));
 		
-		translate.setToX(910);
+		translate.setToX(1024);
 		translate.play();
 	}
 
@@ -127,47 +243,57 @@ public class TelaEstacaoController implements Initializable {
 		
 		TranslateTransition translate = new TranslateTransition();
 		translate.setNode(tremEstacao);
-		translate.setFromX(-345);
+//		translate.setFromX(-345);
+		translate.setFromX(1024);
 		translate.setDuration(Duration.millis(1500));
 		
-		translate.setToX(10);
+		translate.setToX(0);
 		translate.play();
 	}
 	
-	public void atualizarProgressoTrem(double progresso) {
-		progressoCaminhoTrem.setProgress(progresso);
-//		if (progresso > 0.98) {
-//			progressoPane.setVisible(false);
-//		}
+	private void mostrarPropriedadesEstacao() {
+		System.out.println("Carga Deposito: " + Integer.toString(Main.cargaMaximaDeposito));
+		System.out.println("\nNome empacotador: " + Main.nomeEmpacotador);
+		System.out.println("Tempo empacotamento: " + Integer.toString(Main.tempoEmpacotamento));
+		System.out.println("\nNome trem: " + Main.nomeTrem);
+		System.out.println("Carga Trem: " + Integer.toString(Main.cargaMaximaVagao));
+		System.out.println("Tempo Trem: " + Integer.toString(Main.tempoViagemInicial) + "\n");
 	}
 	
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		int i;
+		mostrarPropriedadesEstacao();
+		
+		qtdMoedas.setText(Integer.toString(Main.qtmoedas));
 
 		Main.tremDeCarga = new Trem(
 			1,
-			Main.cargaMaximaDeposito,
+			Main.tempoViagemInicial,
+			Main.nomeTrem,
 			this
 		);
-		Main.tremDeCarga.start();
+
+		empacotadores[0] = new ImageView(imagemEmpacotador);
+
+		empacotadores[0].setLayoutX(75);
+		empacotadores[0].setLayoutY(50);
+		empacotadores[0].setFitWidth(30);
+		empacotadores[0].setFitHeight(52);
+			
+		mainPane.getChildren().add(empacotadores[0]);
 		
-//		progressoPane.setVisible(false);
-//		progressoCaminhoTrem.setProgress(0.5);
-		progressoCaminhoTrem.getStyleClass().add("blue-bar");
-		for (i = 0; i < Main.qtdEmpacotadores; i++) {
-			empacotadores[i] = new ImageView(imagemEmpacotador);
-			
-			empacotadores[i].setLayoutX(52 + (46 * (i % 5)));
-			empacotadores[i].setLayoutY(113 + ((int) i / 5) * 20);
-				
-			mainPane.getChildren().add(empacotadores[i]);
-			
-			String nome = String.format("Empacotador %d", i+1);
-			Main.empacotadores[i] = new Empacotador(i, nome, Main.tempoEmpacotamentoInicial, this);
-			
-			Main.empacotadores[i].start();
-		}
+		Main.empacotadores[0] = new Empacotador(
+			Main.identificadorEmpacotador,
+			Main.nomeEmpacotador,
+			Main.tempoEmpacotamento,
+			this
+		);
+		
+		Main.tremDeCarga.start();
+		Main.empacotadores[0].start();
+		menuMusica.setText("Desligar música");
+//		Main.musica.tocarMusica();
 	}
 	
 }
