@@ -18,6 +18,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MenuEstacaoController implements Initializable {
@@ -149,9 +150,9 @@ public class MenuEstacaoController implements Initializable {
 //			null
 //		);
 		
-		AnchorPane root;
+		BorderPane root;
         try {
-        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaEstacao.fxml"));
+        	root = (BorderPane)FXMLLoader.load(getClass().getResource("TelaEstacao.fxml"));
         	
         	Scene scene = new Scene(root, 900, 460);
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

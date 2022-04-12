@@ -74,7 +74,8 @@ public class TelaEstacaoController implements Initializable {
 		
 		AnchorPane root;
         try {
-        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaContratarEmpacotador.fxml"));
+//        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaContratarEmpacotador.fxml"));
+        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaMelhorias.fxml"));
         	
         	Scene scene = new Scene(root, 500, 426);
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -203,6 +204,13 @@ public class TelaEstacaoController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		System.out.println("Carga Deposito: " + Integer.toString(Main.cargaMaximaDeposito));
+		System.out.println("\nNome empacotador: " + Main.nomeEmpacotador);
+		System.out.println("Tempo empacotamento: " + Integer.toString(Main.tempoEmpacotamento));
+		System.out.println("\nNome trem: " + Main.nomeTrem);
+		System.out.println("Carga Trem: " + Integer.toString(Main.cargaMaximaVagao));
+		System.out.println("Tempo Trem: " + Integer.toString(Main.tempoViagemInicial));
+
 		Main.tremDeCarga = new Trem(
 			1,
 			Main.tempoViagemInicial,
