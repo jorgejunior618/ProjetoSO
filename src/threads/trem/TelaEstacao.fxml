@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -54,12 +55,18 @@
                </font>
             </Label>
             <Label layoutX="933.0" layoutY="36.0" text="Moedas" />
-            <TextField alignment="CENTER" layoutX="927.0" layoutY="54.0" prefHeight="25.0" prefWidth="54.0" text="999" />
-            <Button layoutX="206.0" layoutY="439.0" mnemonicParsing="false" onAction="#addEmpacotador" text="Contratar Empacotador" />
+            <TextField alignment="CENTER" layoutX="927.0" layoutY="54.0" prefHeight="25.0" prefWidth="54.0" text="0" />
+            <Button layoutX="294.0" layoutY="439.0" mnemonicParsing="false" onAction="#addEmpacotador" prefHeight="30.0" prefWidth="176.0" text="+ Empacotador">
+               <font>
+                  <Font size="11.0" />
+               </font></Button>
             <MenuBar layoutY="2.0" prefHeight="14.0" prefWidth="1024.0" AnchorPane.topAnchor="0.0">
               <menus>
-                <Menu mnemonicParsing="false" text="Sair" />
-                <Menu mnemonicParsing="false" text="Música" />
+                <Menu mnemonicParsing="false" text="Jogo">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
+                        <MenuItem fx:id="menuMusica" mnemonicParsing="false" onAction="#musicaPausarIniciar" text="Música" />
+                     </items></Menu>
               </menus>
             </MenuBar>
             <ImageView fitHeight="37.0" fitWidth="26.0" layoutX="122.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
@@ -92,7 +99,10 @@
                   <Image url="@assets/package_full_mod.png" />
                </image>
             </ImageView>
-            <Button layoutX="90.0" layoutY="439.0" mnemonicParsing="false" text="Ver Melhorias" />
+            <Button layoutX="90.0" layoutY="439.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Melhorias">
+               <font>
+                  <Font size="11.0" />
+               </font></Button>
             <TextField fx:id="qtdPacotes" alignment="CENTER" editable="false" layoutX="59.0" layoutY="213.0" prefHeight="30.0" prefWidth="62.0" text="0">
                <font>
                   <Font name="System Bold" size="14.0" />

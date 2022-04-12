@@ -19,9 +19,10 @@ public class Main extends Application {
 	
 	// Campos para inicalizar a thread
 	// Empacotadores
-	public static int tempoEmpacotamentoInicial;
-	public static String nomePrimeiroEmpacotador;
-	public static String identificadorPrimeiroEmpacotador;
+	public static boolean contratoAceito;
+	public static int tempoEmpacotamento;
+	public static String nomeEmpacotador;
+	public static String identificadorEmpacotador;
 	
 	// Trem
 	public static int tempoViagemInicial;
@@ -99,10 +100,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		String filepath = "filepath";
+		String filepath = "musica.wav";
 		
-		Sound musica = new Sound();
-		musica.playmusic(filepath);
+		musica = new Sound(filepath);
 		
 		launch(args);
 	}

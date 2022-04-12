@@ -133,9 +133,9 @@ public class MenuEstacaoController implements Initializable {
 
 		// Campos para inicalizar a thread
 		// Empacotadores
-		Main.tempoEmpacotamentoInicial = Integer.parseInt(velocidadeEmpacotador.getText());
-		Main.nomePrimeiroEmpacotador = nomeEmpacotador.getText();
-		Main.identificadorPrimeiroEmpacotador = idEmpacotador.getText();
+		Main.tempoEmpacotamento = Integer.parseInt(velocidadeEmpacotador.getText());
+		Main.nomeEmpacotador = nomeEmpacotador.getText();
+		Main.identificadorEmpacotador = idEmpacotador.getText();
 		
 		// Trem
 		Main.tempoViagemInicial = Integer.parseInt(velocidadeTrem.getText());

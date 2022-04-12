@@ -40,9 +40,9 @@ public class MenuInicialController implements Initializable {
 
 		// Campos para inicalizar a thread
 		// Empacotadores
-		Main.tempoEmpacotamentoInicial = 2; // 10
-		Main.nomePrimeiroEmpacotador = "Robervaldo";
-		Main.identificadorPrimeiroEmpacotador = "Empacotador Padrao";
+		Main.tempoEmpacotamento = 2; // 10
+		Main.nomeEmpacotador = "Robervaldo";
+		Main.identificadorEmpacotador = "Empacotador Padrao";
 		
 		// Trem
 		Main.tempoViagemInicial = 15; // 45

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="420.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+<AnchorPane fx:id="telaAddEmpacotador" prefHeight="420.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="threads.trem.TelaContratarEmpacotadorController">
    <children>
       <AnchorPane layoutY="6.0" minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="500.0">
          <children>
@@ -23,7 +22,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="nomeEmpacotador" layoutX="175.0" layoutY="212.0" prefHeight="30.0" prefWidth="150.0" promptText="Nome ">
+            <TextField fx:id="nomeEmpacotador" layoutX="246.0" layoutY="212.0" prefHeight="30.0" prefWidth="150.0" promptText="Nome ">
                <font>
                   <Font size="10.0" />
                </font>
@@ -33,7 +32,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="idEmpacotador" layoutX="175.0" layoutY="255.0" prefHeight="30.0" prefWidth="150.0" promptText="Identificador">
+            <TextField fx:id="idEmpacotador" layoutX="246.0" layoutY="255.0" prefHeight="30.0" prefWidth="150.0" promptText="Identificador">
                <font>
                   <Font size="10.0" />
                </font>
@@ -43,15 +42,17 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="velocidadeEmpacotador" layoutX="175.0" layoutY="299.0" prefHeight="30.0" prefWidth="150.0" promptText="Duração (seg)">
+            <TextField fx:id="velocidadeEmpacotador" editable="false" layoutX="246.0" layoutY="299.0" prefHeight="30.0" prefWidth="150.0" promptText="Duração (seg)">
                <font>
                   <Font size="10.0" />
                </font>
             </TextField>
-            <Button fx:id="finalizar" layoutX="175.0" layoutY="375.0" mnemonicParsing="false" onAction="#finalizar" prefHeight="30.0" prefWidth="150.0" text="Contratar" textFill="#267b30" />
-            <Button fx:id="voltarEmpacotador" layoutX="14.0" layoutY="375.0" mnemonicParsing="false" onAction="#irParaTrem" prefHeight="30.0" prefWidth="86.0" text="Cancelar" />
-            <TextField layoutX="391.0" layoutY="377.0" prefHeight="26.0" prefWidth="73.0" text="X Moedas" />
-            <Label layoutX="348.0" layoutY="381.0" text="Custo:" />
+            <Button layoutX="171.0" layoutY="375.0" mnemonicParsing="false" onAction="#contratar" prefHeight="30.0" prefWidth="160.0" text="Contratar" textFill="#267b30" />
+            <Button layoutX="14.0" layoutY="375.0" mnemonicParsing="false" onAction="#negarContrato" prefHeight="30.0" prefWidth="128.0" text="Cancelar" />
+            <TextField fx:id="custo" alignment="CENTER" editable="false" layoutX="438.0" layoutY="377.0" prefHeight="26.0" prefWidth="42.0" text="0" />
+            <Label layoutX="348.0" layoutY="382.0" text="Custo:" />
+            <Button layoutX="445.0" layoutY="299.0" mnemonicParsing="false" onAction="#aumentarTempo" prefHeight="30.0" prefWidth="34.0" text="+" />
+            <Button layoutX="402.0" layoutY="299.0" mnemonicParsing="false" onAction="#diminuirTempo" prefHeight="30.0" prefWidth="34.0" text="-" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="79.0" prefWidth="500.0" style="-fx-background-color: PINK;">
