@@ -19,7 +19,9 @@ public class Empacotador extends Thread {
 	}
 
 	private void empacotar() {
-		System.out.println(getName() + " " + Integer.toString(id));
+		
+		avisaEmpacotando();
+		
 		long inicio = System.currentTimeMillis();
 		
 		this.controller.comecarTrabalhoEmpacotador(this.id);
@@ -43,7 +45,8 @@ public class Empacotador extends Thread {
 		} else if (Main.cargaDeposito > Main.cargaMaximaVagao && Main.full.availablePermits() == 0) {
 			Main.full.release();
 		}
-		System.out.println("Pacote Inserido");
+		
+		avisaGuardandoPacote();
 
 		this.controller.mudaTextoQtdPacotes();
 	}
@@ -55,8 +58,36 @@ public class Empacotador extends Thread {
 		while(System.currentTimeMillis() - inicio  < 500) {
 		}
 	}
+	
+	/* Métodos de registro de Log */
+	
+	private void avisaInicializacao() {
+		String mensagem = "O novo empacotador %s se juntou a equipe!";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+	private void avisaEmpacotando() {
+		String mensagem = "Empacotador %s a empacotar...";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+	private void avisaGuardandoPacote() {
+		String mensagem = "Empacotador %s acaba de guardar um pacote no depósito!";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+//	private void avisaDescanso() {
+//		String mensagem = "Empacotador %s está descansando...";
+//		
+//		Log.printlog(this.nome, mensagem);
+//	}
+	
 
 	public void run() {
+		avisaInicializacao();
 		while(!Main.encerrarThreads) {
 			try {
 				empacotar();

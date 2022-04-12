@@ -114,7 +114,7 @@ public class TelaEstacaoController implements Initializable {
         		Main.empacotadores[Main.qtdEmpacotadores].start();
         		Main.qtdEmpacotadores += 1;
             } else {
-            	System.out.println(" ----------- CONTRATO Negado");
+            	avisaContratoCancelado();
             }
         }
         catch (IOException e) {
@@ -201,15 +201,24 @@ public class TelaEstacaoController implements Initializable {
 		translate.play();
 	}
 	
+	/* Método de registro de Log */
+	
+	private void avisaCapacidade() {
+		String mensagem = "A Estação possui capacidade de %s pacotes!";
+		
+		Log.printlog(Integer.toString(Main.cargaMaximaDeposito), mensagem);
+	}
+	
+	private void avisaContratoCancelado() {
+		String mensagem = "Tentativa de contratar empacotador falhou!";
+		
+		Log.printlog(Log.codigoErro, mensagem);
+	}
+	
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		System.out.println("Carga Deposito: " + Integer.toString(Main.cargaMaximaDeposito));
-		System.out.println("\nNome empacotador: " + Main.nomeEmpacotador);
-		System.out.println("Tempo empacotamento: " + Integer.toString(Main.tempoEmpacotamento));
-		System.out.println("\nNome trem: " + Main.nomeTrem);
-		System.out.println("Carga Trem: " + Integer.toString(Main.cargaMaximaVagao));
-		System.out.println("Tempo Trem: " + Integer.toString(Main.tempoViagemInicial));
+		avisaCapacidade();
 
 		Main.tremDeCarga = new Trem(
 			1,
