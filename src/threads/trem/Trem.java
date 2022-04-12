@@ -16,7 +16,7 @@ public class Trem extends Thread {
 	}
 	
 	private void ida(long inicio) {
-		System.out.println("Saindo para entrega.");
+		avisaPartida();
 		
 		long tempoCorrido = 0;
 
@@ -34,6 +34,8 @@ public class Trem extends Thread {
 	}
 	
 	private void volta(long inicio) {
+		avisaChegada();
+		
 		double progresso = 1.00000;
 		long tempoCorrido = tempoTransporte * 500;
 		
@@ -78,6 +80,19 @@ public class Trem extends Thread {
 			Main.empty.release();
 		}
 		this.controller.mudaTextoQtdPacotes();
+	}
+	
+	/* Métodos de registro de Log */
+	public void avisaPartida() {
+		String mensagem = "Trem %s acaba de partir da estação!";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+	public void avisaChegada() {
+		String mensagem = "Trem %s acaba de chegar na estação!";
+		
+		Log.printlog(this.nome, mensagem);
 	}
 
 	public void run() {

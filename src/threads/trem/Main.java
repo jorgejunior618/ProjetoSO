@@ -104,6 +104,8 @@ public class Main extends Application {
 		
 		musica = new Sound(filepath);
 		
+		Log.setAtivado(true);
+		
 		launch(args);
 	}
 }
