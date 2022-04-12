@@ -48,7 +48,7 @@ public class TelaEstacaoController implements Initializable {
 		String novoTexto = String.format("%d", Main.cargaDeposito);
 		qtdPacotes.setText(novoTexto);
 	}
-	/* ----------- MÉTODOS DE CONFIGURÇÃO ----------- */
+	/* ----------- MÃ‰TODOS DE CONFIGURÃ‡ÃƒO ----------- */
 
 	@FXML
 	private void sair(ActionEvent event) {
@@ -60,10 +60,10 @@ public class TelaEstacaoController implements Initializable {
 	private void musicaPausarIniciar(ActionEvent event) {
 		if (Main.musica.tocando) {
 			Main.musica.pararMusica();
-			menuMusica.setText("Ligar música");
+			menuMusica.setText("Ligar mÃºsica");
 		} else {
 			Main.musica.tocarMusica();
-			menuMusica.setText("Desligar música");
+			menuMusica.setText("Desligar mÃºsica");
 		}
 	}
 	
@@ -126,7 +126,7 @@ public class TelaEstacaoController implements Initializable {
         		Main.empacotadores[Main.qtdEmpacotadores].start();
         		Main.qtdEmpacotadores += 1;
             } else {
-            	System.out.println(" ----------- CONTRATO Negado");
+            	avisaContratoCancelado();
             }
         }
         catch (IOException e) {
@@ -191,7 +191,7 @@ public class TelaEstacaoController implements Initializable {
 			
 		}
 	}
-	/* ----------- MÉTODOS DE ANIMAÇÃO: EMPACOTADOR ----------- */
+	/* ----------- MÃ‰TODOS DE ANIMAÃ‡ÃƒO: EMPACOTADOR ----------- */
 
 	public void comecarTrabalhoEmpacotador(int id) {
 		Image estadoEmpacotador;
@@ -244,7 +244,7 @@ public class TelaEstacaoController implements Initializable {
 		translate.play();
 	}
 
-	/* ----------- MÉTODOS DE ANIMAÇÃO: TREM ----------- */
+	/* ----------- MÃ‰TODOS DE ANIMAÃ‡ÃƒO: TREM ----------- */
 
 
 	public void sairParaEntregaTrem() {
@@ -271,23 +271,26 @@ public class TelaEstacaoController implements Initializable {
 		translate.play();
 	}
 	
-	private void mostrarPropriedadesEstacao() {
-		System.out.println("Carga Deposito: " + Integer.toString(Main.cargaMaximaDeposito));
-		System.out.println("\nNome empacotador: " + Main.nomeEmpacotador);
-		System.out.println("Tempo empacotamento: " + Integer.toString(Main.tempoEmpacotamento));
-		System.out.println("\nNome trem: " + Main.nomeTrem);
-		System.out.println("Carga Trem: " + Integer.toString(Main.cargaMaximaVagao));
-		System.out.println("Tempo Trem: " + Integer.toString(Main.tempoViagemInicial) + "\n");
+	/* MÃ©todo de registro de Log */
+	
+	private void avisaCapacidade() {
+		String mensagem = "A EstaÃ§Ã£o possui capacidade de %s pacotes!";
+		
+		Log.printlog(Integer.toString(Main.cargaMaximaDeposito), mensagem);
+	}
+	
+	private void avisaContratoCancelado() {
+		String mensagem = "Tentativa de contratar empacotador falhou!";
+		
+		Log.printlog(Log.codigoErro, mensagem);
 	}
 	
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		mostrarPropriedadesEstacao();
-		
-		
 		alteraTextoMoedas();
 
+		avisaCapacidade();
 		Main.tremDeCarga = new Trem(
 			1,
 			Main.tempoViagemInicial,
@@ -313,9 +316,9 @@ public class TelaEstacaoController implements Initializable {
 		
 		Main.tremDeCarga.start();
 		Main.empacotadores[0].start();
-		menuMusica.setText("Desligar música");
+		menuMusica.setText("Desligar mÃºsica");
 		menuLogs.setText("Desligar Log");
-		//Main.musica.tocarMusica();
+//		Main.musica.tocarMusica();
 	}
 	
 }

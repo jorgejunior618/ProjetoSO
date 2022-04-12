@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 public final class Log {
 	
 	private static boolean ativado;
+	public static final String codigoErro= "a0000xa0000DELTA";
 	
 	public static void setAtivado(boolean ativar) {
 		ativado = ativar;
@@ -27,9 +28,13 @@ public final class Log {
 	
 	public static void printlog(String id, String mensagem) {
 		if (ativado) {
-			String corpo = String.format(mensagem, id);
+			if (id == Log.codigoErro) {
+				System.out.println(cabecalho() + mensagem);
+			} else {
+				String corpo = String.format(mensagem, id);
+				System.out.println(cabecalho() + corpo);
+			}
 			
-			System.out.println(cabecalho() + corpo);
 		}
 		
 	}

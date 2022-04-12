@@ -58,8 +58,9 @@ public class TelaContratarEmpacotadorController implements Initializable {
 	
 	@FXML
 	private void contratar(ActionEvent event) {
+    
 		if (Main.modoJogo == ModoJogo.DESAFIO  &&  Main.qtmoedas < valorCompra) {
-			System.out.println("Saldo Insuficiente");
+			avisaSaldoInsuficiente();
 			return;
 		}
 		Main.tempoEmpacotamento = Integer.parseInt(velocidadeEmpacotador.getText());
@@ -98,6 +99,14 @@ public class TelaContratarEmpacotadorController implements Initializable {
 		        }
 		    }
 		});
+	}
+	
+	/* Métodos de registro de Log */
+	
+	private void avisaSaldoInsuficiente() {
+		String mensagem = "Impossível contratar empacotador com saldo atual!";
+		
+		Log.printlog(Log.codigoErro, mensagem);
 	}
 
 	@Override
