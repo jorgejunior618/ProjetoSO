@@ -41,7 +41,8 @@ public class Trem extends Thread {
 		while(System.currentTimeMillis() - inicio  < (long) tempoTransporte * 1000 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 		}
-		System.out.println(String.format("O Trem voltou à estação."));
+		avisaChegada();
+		System.out.println(String.format("O Trem voltou Ã  estaÃ§Ã£o."));
 	}
 
 	private void transportar() {
@@ -53,7 +54,6 @@ public class Trem extends Thread {
 	}
 
 	private void encherCarga() {
-		System.out.println("Movendo Pacotes do depósito para Carga do trem.");
 		int i;
 		for (i = 0; i < Main.cargaMaximaVagao; i++) {
 			Main.cargaDeposito -= 1;
@@ -63,20 +63,28 @@ public class Trem extends Thread {
 		this.controller.mudaTextoQtdPacotes();
 	}
 	
-	/* M�todos de registro de Log */
-	public void avisaPartida() {
-		String mensagem = "Trem %s acaba de partir da esta��o!";
+	/* Métodos de registro de Log */
+	
+	private void avisaInicializacao() {
+		String mensagem = "Novo trem %s está pronto para uso!";
 		
 		Log.printlog(this.nome, mensagem);
 	}
 	
-	public void avisaChegada() {
-		String mensagem = "Trem %s acaba de chegar na esta��o!";
+	private void avisaPartida() {
+		String mensagem = "Trem %s acaba de partir da estação!";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+	private void avisaChegada() {
+		String mensagem = "Trem %s acaba de chegar na estação com o pagamento!";
 		
 		Log.printlog(this.nome, mensagem);
 	}
 
 	public void run() {
+		avisaInicializacao();
 		while(!Main.encerrarThreads) {
 			try {
 				Main.full.acquire();

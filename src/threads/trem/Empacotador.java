@@ -19,10 +19,11 @@ public class Empacotador extends Thread {
 	}
 
 	/**
-	 * Fun��o de temporizar o tempo de empacotamento dedfinido para o empacotador
+	 * Função de temporizar o tempo de empacotamento dedfinido para o empacotador
 	 */
 	private void empacotar() {
-		System.out.println(getName() + ": Come�ou a empacotar");
+		avisaEmpacotando();
+		
 		long inicio = System.currentTimeMillis();
 		
 		this.controller.comecarTrabalhoEmpacotador(this.id);
@@ -33,7 +34,7 @@ public class Empacotador extends Thread {
 	}
 
 	/**
-	 * Fun��o para chamar a anima��o de ir deixar o pacote na posi��o do dep�sito
+	 * Função para chamar a animação de ir deixar o pacote na posição do depósito
 	 */
 	private void deixarPacote() throws InterruptedException {
 		System.out.println(getName() + ": Foi guardar pacote");
@@ -45,7 +46,7 @@ public class Empacotador extends Thread {
 	}
 
 	/**
-	 * Fun��o para incrementar o valor total de pacotes no dep�sito
+	 * Função para incrementar o valor total de pacotes no depósito
 	 */
 	private void inserirPacote() {
 		Main.cargaDeposito += 1;
@@ -54,13 +55,14 @@ public class Empacotador extends Thread {
 		} else if (Main.cargaDeposito > Main.cargaMaximaVagao && Main.full.availablePermits() == 0) {
 			Main.full.release();
 		}
-		System.out.printf("Pacote Inserido, total de pacotes: %d\n", Main.cargaDeposito);
-
-		this.controller.mudaTextoQtdPacotes();
+    
+		avisaGuardandoPacote();
+		
+    this.controller.mudaTextoQtdPacotes();
 	}
 	
 	/**
-	 * Fun��o para chamar a anima��o de voltar a posi��o inicial
+	 * Função para chamar a animação de voltar a posição inicial
 	 */
 	private void voltarAoPosto() throws InterruptedException {
 		long inicio = System.currentTimeMillis();
@@ -69,8 +71,36 @@ public class Empacotador extends Thread {
 		while(System.currentTimeMillis() - inicio  < 500) {
 		}
 	}
+	
+	/* Métodos de registro de Log */
+	
+	private void avisaInicializacao() {
+		String mensagem = "O novo empacotador %s se juntou a equipe!";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+	private void avisaEmpacotando() {
+		String mensagem = "Empacotador %s a empacotar...";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+	private void avisaGuardandoPacote() {
+		String mensagem = "Empacotador %s acaba de guardar um pacote no depósito!";
+		
+		Log.printlog(this.nome, mensagem);
+	}
+	
+//	private void avisaDescanso() {
+//		String mensagem = "Empacotador %s está descansando...";
+//		
+//		Log.printlog(this.nome, mensagem);
+//	}
+	
 
 	public void run() {
+		avisaInicializacao();
 		while(!Main.encerrarThreads) {
 			try {
 				empacotar();
