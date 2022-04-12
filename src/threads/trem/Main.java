@@ -36,14 +36,38 @@ public class Main extends Application {
 	public static Semaphore full = new Semaphore(0);
 
 	public static Semaphore mutex = new Semaphore(1);
+	public static Semaphore mutexMoedas = new Semaphore(1);
 
 	public static int cargaDeposito = 0;
 		
-	public static int qtmoedas = 999;			//Variavel que guarda as moedas atuais.
+	public static int qtmoedas = 800;			//Variavel que guarda as moedas atuais.
 	public static ModoJogo modoJogo;
 	public static TipoMelhoria melhoria = TipoMelhoria.NENHUMA;
 	public static Sound musica;
 	
+	/**
+	 * Altera o valor da quantidade total de moedas.
+	 * 
+	 * <p>Recebe: int quantidade. Para diminuir o valor da quantidade de moedas, inserir numero negativo
+	 * 
+	 * <p>Ex.:	Main.qtMoedas = 10 
+	 * 		Main.alterarQtMoedas(-3); -> Main.qtMoedas = 10 - 3.
+	 * 
+	 * <p>Ex.:	Main.qtMoedas = 10 
+	 * 		Main.alterarQtMoedas(7); -> Main.qtMoedas = 10 + 7.
+	 */
+	public static void alterarQtMoedas(int quantidade) {
+		try {
+			mutexMoedas.acquire();
+			System.out.println();
+			System.out.println("Carga carregada: " + Integer.toString(qtmoedas));
+			System.out.println("Carga carregada: " + Integer.toString(quantidade));
+			qtmoedas += quantidade;
+			mutexMoedas.release();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void fecharJogo(Stage stage, boolean encerrarTreads) {		
 		if (encerrarTreads) {
 			long inicio = System.currentTimeMillis();

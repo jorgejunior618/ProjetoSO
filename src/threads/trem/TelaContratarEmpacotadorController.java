@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class TelaContratarEmpacotadorController implements Initializable {
 	int tempoEmpacotamento = 10;
-	int valorCompra = 10;
+	int valorCompra = 20;
 	@FXML
 	private AnchorPane telaAddEmpacotador;
 	
@@ -66,6 +66,7 @@ public class TelaContratarEmpacotadorController implements Initializable {
 		Main.identificadorEmpacotador = idEmpacotador.getText();
 		Main.nomeEmpacotador = nomeEmpacotador.getText();
 		Main.contratoAceito = true;
+		Main.alterarQtMoedas(-valorCompra);
 		sair();
 	}
 	

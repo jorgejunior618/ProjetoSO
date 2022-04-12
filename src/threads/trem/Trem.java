@@ -4,6 +4,7 @@ public class Trem extends Thread {
 	public int id;
 	public String nome;
 	public int tempoTransporte;
+	private int qtdPacotesTransporte = 0;
 	public TelaEstacaoController controller;
 
 	public Trem(int id, int tt, String nome, TelaEstacaoController controller) {
@@ -20,47 +21,27 @@ public class Trem extends Thread {
 		
 		long tempoCorrido = 0;
 
-		double progresso = 0.000000;
-		//this.controller.atualizarProgressoTrem(progresso);
 		while(tempoCorrido < (long) tempoTransporte * 500 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
-			
-			int andamento = (int) tempoCorrido * 2 / (tempoTransporte * 1);
-			if (andamento  / 1000.0 != progresso) {
-				progresso = andamento / 1000.0;
-				//this.controller.atualizarProgressoTrem(progresso);
-			}
 		}
 	}
 	
 	private void volta(long inicio) {
 		avisaChegada();
+		Main.alterarQtMoedas(qtdPacotesTransporte);
+		this.controller.alteraTextoMoedas();
+		this.qtdPacotesTransporte = 0;
 		
-		double progresso = 1.00000;
 		long tempoCorrido = tempoTransporte * 500;
 		
 		while(tempoCorrido < (long) tempoTransporte * 1000 - 1500 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
-			
-			int andamento = (tempoTransporte * 200) - (int) tempoCorrido * 2 / (tempoTransporte*1);
-			if (andamento  / 1000.0 != progresso) {
-				progresso = andamento / 1000.0;
-				//this.controller.atualizarProgressoTrem(progresso);
-			}
 		}
 		this.controller.chegaNaEstacaoTrem();
 		while(System.currentTimeMillis() - inicio  < (long) tempoTransporte * 1000 && !Main.encerrarThreads) {
 			tempoCorrido = System.currentTimeMillis() - inicio;
-			
-			int andamento =  (tempoTransporte * 200) -  (int) tempoCorrido * 2 /(tempoTransporte*1);
-			if (andamento / 1000.0 != progresso) {
-				progresso = andamento / 1000.0;
-				//this.controller.atualizarProgressoTrem(progresso);
-			}
 		}
 		System.out.println(String.format("O Trem voltou à estação."));
-		Main.qtmoedas+=1;
-		System.out.println("Voce adquiriu 1 moeda.");
 	}
 
 	private void transportar() {
@@ -74,9 +55,9 @@ public class Trem extends Thread {
 	private void encherCarga() {
 		System.out.println("Movendo Pacotes do depósito para Carga do trem.");
 		int i;
-		
 		for (i = 0; i < Main.cargaMaximaVagao; i++) {
 			Main.cargaDeposito -= 1;
+			this.qtdPacotesTransporte += 1;
 			Main.empty.release();
 		}
 		this.controller.mudaTextoQtdPacotes();

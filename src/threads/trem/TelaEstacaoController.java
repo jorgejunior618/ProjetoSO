@@ -118,7 +118,7 @@ public class TelaEstacaoController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
-
+        alteraTextoMoedas();
 	}
 
 	@FXML
@@ -165,9 +165,12 @@ public class TelaEstacaoController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
-
+        alteraTextoMoedas();
 	}
-
+	
+	public void alteraTextoMoedas() {
+		qtdMoedas.setText(Integer.toString(Main.qtmoedas));
+	}
 	/* ----------- MÉTODOS DE ANIMAÇÃO: EMPACOTADOR ----------- */
 
 	public void comecarTrabalhoEmpacotador(int id) {
@@ -261,6 +264,8 @@ public class TelaEstacaoController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		mostrarPropriedadesEstacao();
+		
+		qtdMoedas.setText(Integer.toString(Main.qtmoedas));
 
 		Main.tremDeCarga = new Trem(
 			1,

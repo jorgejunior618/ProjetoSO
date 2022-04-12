@@ -125,7 +125,7 @@ public class TelaMelhoriasController implements Initializable {
 		}
 		
 		Main.melhoria = TipoMelhoria.ESTACAO;
-		Main.qtmoedas -= custoDepositoInt;
+		Main.alterarQtMoedas(-custoDepositoInt);
 		Main.cargaMaximaDepositoAlterada = capacidadeDepositoInt;
 		sair();
 	}
@@ -188,7 +188,7 @@ public class TelaMelhoriasController implements Initializable {
 		}
 		
 		Main.melhoria = TipoMelhoria.TREM;
-		Main.qtmoedas -= custoTremInt;
+		Main.alterarQtMoedas(-custoTremInt);
 		Main.nomeTrem = nomeTrem.getText();
 		Main.tempoViagemInicial = duracaoViagemTremInt;
 		Main.cargaMaximaVagao = capacidadeCargaTremInt;
@@ -229,7 +229,7 @@ public class TelaMelhoriasController implements Initializable {
 		}
 		
 		Main.melhoria = TipoMelhoria.EMPACOTADOR;
-		Main.qtmoedas -= custoEmpacotadorInt;
+		Main.alterarQtMoedas(-custoEmpacotadorInt);
 		Main.tempoEmpacotamento = tempoEmpacotamentoInt;
 		Main.idEmpacotadorAlterado = empacotadorSelecionado;
 		sair();
