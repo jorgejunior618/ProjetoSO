@@ -3,6 +3,7 @@ package threads.trem;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,6 +12,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import javafx.scene.control.SingleSelectionModel;
+
 
 public class TelaMelhoriasController implements Initializable {
 	int empacotadorSelecionado;
@@ -90,6 +94,8 @@ public class TelaMelhoriasController implements Initializable {
 	private Button botaoMelhorarEmpacotador;
 	
 	
+	SingleSelectionModel<Tab> selectionModel;
+	
 	// METODOS DE MELHORIAS	######################################################################################
 	// ESTACAO				######################################################################################
 
@@ -119,13 +125,16 @@ public class TelaMelhoriasController implements Initializable {
 
 	@FXML
 	private void melhorarEstacao() {
-		if (Main.qtmoedas < custoDepositoInt) {
+
+		if (Main.modoJogo == ModoJogo.DESAFIO && Main.qtmoedas < custoEmpacotadorInt) {
 			System.out.println("Saldo Insuficiente");
 			return;
 		}
 		
 		Main.melhoria = TipoMelhoria.ESTACAO;
-		Main.alterarQtMoedas(-custoDepositoInt);
+		if(Main.modoJogo == ModoJogo.DESAFIO) {
+			Main.alterarQtMoedas(-custoDepositoInt);
+		}
 		Main.cargaMaximaDepositoAlterada = capacidadeDepositoInt;
 		sair();
 	}
@@ -182,13 +191,15 @@ public class TelaMelhoriasController implements Initializable {
 
 	@FXML
 	private void melhorarTrem() {
-		if (Main.qtmoedas < custoTremInt) {
+		if (Main.modoJogo == ModoJogo.DESAFIO && Main.qtmoedas < custoEmpacotadorInt) {
 			System.out.println("Saldo Insuficiente");
 			return;
 		}
 		
 		Main.melhoria = TipoMelhoria.TREM;
-		Main.alterarQtMoedas(-custoTremInt);
+		if(Main.modoJogo == ModoJogo.DESAFIO) {
+			Main.alterarQtMoedas(-custoTremInt);
+		}
 		Main.nomeTrem = nomeTrem.getText();
 		Main.tempoViagemInicial = duracaoViagemTremInt;
 		Main.cargaMaximaVagao = capacidadeCargaTremInt;
@@ -223,13 +234,15 @@ public class TelaMelhoriasController implements Initializable {
 
 	@FXML
 	private void melhorarEmpacotador() {
-		if (Main.qtmoedas < custoEmpacotadorInt) {
+		if (Main.modoJogo == ModoJogo.DESAFIO && Main.qtmoedas < custoEmpacotadorInt) {
 			System.out.println("Saldo Insuficiente");
 			return;
 		}
 		
 		Main.melhoria = TipoMelhoria.EMPACOTADOR;
-		Main.alterarQtMoedas(-custoEmpacotadorInt);
+		if(Main.modoJogo == ModoJogo.DESAFIO) {
+			Main.alterarQtMoedas(-custoEmpacotadorInt);
+		}
 		Main.tempoEmpacotamento = tempoEmpacotamentoInt;
 		Main.idEmpacotadorAlterado = empacotadorSelecionado;
 		sair();
@@ -325,7 +338,29 @@ public class TelaMelhoriasController implements Initializable {
 		tempoEmpacotamentoInt = Main.empacotadores[0].tempoEmpacotamento;
 		custoEmpacotadorInt = 0;
 		
+		selectionModel = tabPaneMelhorias.getSelectionModel();
+		
 		inicializarTestFields();
 	}
 
+	
+	@FXML
+	private void irParaEstacao(ActionEvent event) {
+		//SingleSelectionModel<Tab> selectionModel = tabPaneEstacao.getSelectionModel();
+        selectionModel.select(tabEstacao);
+	}
+	
+	@FXML
+	private void irParaTrem(ActionEvent event) {
+		//SingleSelectionModel<Tab> selectionModel = tabPaneEstacao.getSelectionModel();
+        selectionModel.select(tabTrem);
+ 
+	}
+	
+	@FXML
+	private void irParaEmpacotador(ActionEvent event) {
+		//SingleSelectionModel<Tab> selectionModel = tabPaneEstacao.getSelectionModel();
+        selectionModel.select(tabEmpacotador);
+	}
+	
 }

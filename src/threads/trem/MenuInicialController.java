@@ -37,7 +37,8 @@ public class MenuInicialController implements Initializable {
 		Main.qtdEmpacotadores = 1;
 		Main.cargaMaximaDeposito = 15;
 		Main.cargaMaximaVagao = 5;
-
+		Main.qtmoedas = 20;
+		
 		// Campos para inicalizar a thread
 		// Empacotadores
 		Main.tempoEmpacotamento = 10; // 10
@@ -77,6 +78,7 @@ public class MenuInicialController implements Initializable {
 	@FXML
 	private void iniciarJogoCriativo(ActionEvent event) {
 		Main.modoJogo = ModoJogo.CRIATIVO;
+		Main.qtmoedas = 800;
 		
 		AnchorPane root;
         try {

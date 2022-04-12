@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="threads.trem.TelaEstacaoController">
+<BorderPane fx:id="mainPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="threads.trem.TelaEstacaoController">
    <top>
       <AnchorPane prefHeight="512.0" prefWidth="1018.0" BorderPane.alignment="CENTER">
          <children>
@@ -76,7 +76,7 @@
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
                         <MenuItem fx:id="menuMusica" mnemonicParsing="false" onAction="#musicaPausarIniciar" text="Música" />
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                        <MenuItem fx:id="menuLogs" mnemonicParsing="false" onAction="#logLigarDesligar" text="Desligar Log" />
                      </items></Menu>
               </menus>
             </MenuBar>

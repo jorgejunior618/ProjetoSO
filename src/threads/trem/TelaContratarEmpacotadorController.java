@@ -58,7 +58,7 @@ public class TelaContratarEmpacotadorController implements Initializable {
 	
 	@FXML
 	private void contratar(ActionEvent event) {
-		if (Main.qtmoedas < valorCompra) {
+		if (Main.modoJogo == ModoJogo.DESAFIO  &&  Main.qtmoedas < valorCompra) {
 			System.out.println("Saldo Insuficiente");
 			return;
 		}
@@ -66,7 +66,9 @@ public class TelaContratarEmpacotadorController implements Initializable {
 		Main.identificadorEmpacotador = idEmpacotador.getText();
 		Main.nomeEmpacotador = nomeEmpacotador.getText();
 		Main.contratoAceito = true;
-		Main.alterarQtMoedas(-valorCompra);
+		if(Main.modoJogo == ModoJogo.DESAFIO) {
+			Main.alterarQtMoedas(-valorCompra);
+		}
 		sair();
 	}
 	

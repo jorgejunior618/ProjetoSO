@@ -40,7 +40,7 @@ public class Main extends Application {
 
 	public static int cargaDeposito = 0;
 		
-	public static int qtmoedas = 800;			//Variavel que guarda as moedas atuais.
+	public static int qtmoedas;			//Variavel que guarda as moedas atuais.
 	public static ModoJogo modoJogo;
 	public static TipoMelhoria melhoria = TipoMelhoria.NENHUMA;
 	public static Sound musica;
