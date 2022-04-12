@@ -45,7 +45,7 @@ public class TelaEstacaoController implements Initializable {
 		String novoTexto = String.format("%d", Main.cargaDeposito);
 		qtdPacotes.setText(novoTexto);
 	}
-	/* ----------- MÉTODOS DE CONFIGURÇÃO ----------- */
+	/* ----------- MÃ‰TODOS DE CONFIGURÃ‡ÃƒO ----------- */
 
 	@FXML
 	private void sair(ActionEvent event) {
@@ -57,14 +57,12 @@ public class TelaEstacaoController implements Initializable {
 	private void musicaPausarIniciar(ActionEvent event) {
 		if (Main.musica.tocando) {
 			Main.musica.pararMusica();
-			menuMusica.setText("Ligar música");
+			menuMusica.setText("Ligar mÃºsica");
 		} else {
 			Main.musica.tocarMusica();
-			menuMusica.setText("Desligar música");
+			menuMusica.setText("Desligar mÃºsica");
 		}
 	}
-
-	/* ----------- MÉTODOS DE ANIMAÇÃO: EMPACOTADOR ----------- */
 
 	@FXML
 	public void addEmpacotador() {
@@ -74,24 +72,24 @@ public class TelaEstacaoController implements Initializable {
 		
 		AnchorPane root;
         try {
-//        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaContratarEmpacotador.fxml"));
-        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaMelhorias.fxml"));
+        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaContratarEmpacotador.fxml"));
         	
         	Scene scene = new Scene(root, 500, 426);
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-            Stage telaEstacaoStage = new Stage();
-            telaEstacaoStage.setTitle("Projeto: Estacao");
-            telaEstacaoStage.setScene(scene);
-            telaEstacaoStage.setResizable(false);
+            Stage telaAddEmpacotadorStage = new Stage();
+            telaAddEmpacotadorStage.setTitle("Projeto: Estacao");
+            telaAddEmpacotadorStage.setScene(scene);
+            telaAddEmpacotadorStage.setResizable(false);
+            
 
-            telaEstacaoStage.setOnCloseRequest(closeEvent -> {
+            telaAddEmpacotadorStage.setOnCloseRequest(closeEvent -> {
             	closeEvent.consume();
             	Main.contratoAceito = false;
-				Main.fecharJogo(telaEstacaoStage, false);
+				Main.fecharJogo(telaAddEmpacotadorStage, false);
 			});
             
-            telaEstacaoStage.showAndWait();
+            telaAddEmpacotadorStage.showAndWait();
             
             if (Main.contratoAceito) {            	
         		empacotadores[Main.qtdEmpacotadores] = new ImageView(imagemEmpacotador);
@@ -120,9 +118,61 @@ public class TelaEstacaoController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
+        alteraTextoMoedas();
+	}
 
+	@FXML
+	public void realizarMelhorias() {
+		AnchorPane root;
+        try {
+        	root = (AnchorPane)FXMLLoader.load(getClass().getResource("TelaMelhorias.fxml"));
+        	
+        	Scene scene = new Scene(root, 550, 478);
+        	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+            Stage telaMelhoriasStage = new Stage();
+            telaMelhoriasStage.setTitle("Projeto: Estacao");
+            telaMelhoriasStage.setScene(scene);
+            telaMelhoriasStage.setResizable(false);
+
+            telaMelhoriasStage.setOnCloseRequest(closeEvent -> {
+            	closeEvent.consume();
+            	Main.melhoria = TipoMelhoria.NENHUMA;
+				Main.fecharJogo(telaMelhoriasStage, false);
+			});
+            
+            telaMelhoriasStage.showAndWait();
+            switch (Main.melhoria) {
+	            case ESTACAO:
+					int quantidadeAlterada = Main.cargaMaximaDepositoAlterada - Main.cargaMaximaDeposito;
+	            	for (int i = 0; i < quantidadeAlterada; i++) {
+	            		Main.empty.release();
+	            	}
+	            	Main.cargaMaximaDeposito += quantidadeAlterada;
+	            	break;
+	            case TREM:
+	            	Main.tremDeCarga.nome = Main.nomeTrem;
+	            	Main.tremDeCarga.tempoTransporte = Main.tempoViagemInicial;
+	            	break;
+				case EMPACOTADOR:
+	        		Main.empacotadores[Main.idEmpacotadorAlterado].tempoEmpacotamento = Main.tempoEmpacotamento;
+					break;
+				case NENHUMA:
+					break;
+			}
+            mostrarPropriedadesEstacao();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        alteraTextoMoedas();
 	}
 	
+	public void alteraTextoMoedas() {
+		qtdMoedas.setText(Integer.toString(Main.qtmoedas));
+	}
+	/* ----------- MÃ‰TODOS DE ANIMAÃ‡ÃƒO: EMPACOTADOR ----------- */
+
 	public void comecarTrabalhoEmpacotador(int id) {
 		Image estadoEmpacotador;
 		estadoEmpacotador = new Image(getClass().getResourceAsStream("/threads/trem/assets/packer_work.png"));
@@ -174,7 +224,7 @@ public class TelaEstacaoController implements Initializable {
 		translate.play();
 	}
 
-	/* ----------- MÉTODOS DE ANIMAÇÃO: TREM ----------- */
+	/* ----------- MÃ‰TODOS DE ANIMAÃ‡ÃƒO: TREM ----------- */
 
 
 	public void sairParaEntregaTrem() {
@@ -201,10 +251,10 @@ public class TelaEstacaoController implements Initializable {
 		translate.play();
 	}
 	
-	/* Método de registro de Log */
+	/* MÃ©todo de registro de Log */
 	
 	private void avisaCapacidade() {
-		String mensagem = "A Estação possui capacidade de %s pacotes!";
+		String mensagem = "A EstaÃ§Ã£o possui capacidade de %s pacotes!";
 		
 		Log.printlog(Integer.toString(Main.cargaMaximaDeposito), mensagem);
 	}
@@ -219,7 +269,7 @@ public class TelaEstacaoController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		avisaCapacidade();
-
+    qtdMoedas.setText(Integer.toString(Main.qtmoedas));
 		Main.tremDeCarga = new Trem(
 			1,
 			Main.tempoViagemInicial,
@@ -245,7 +295,7 @@ public class TelaEstacaoController implements Initializable {
 		
 		Main.tremDeCarga.start();
 		Main.empacotadores[0].start();
-		menuMusica.setText("Desligar música");
+		menuMusica.setText("Desligar mÃºsica");
 //		Main.musica.tocarMusica();
 	}
 	

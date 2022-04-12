@@ -154,7 +154,7 @@ public class MenuEstacaoController implements Initializable {
         try {
         	root = (BorderPane)FXMLLoader.load(getClass().getResource("TelaEstacao.fxml"));
         	
-        	Scene scene = new Scene(root, 900, 460);
+        	Scene scene = new Scene(root, 1024, 512);
         	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             Stage telaEstacaoStage = new Stage();
