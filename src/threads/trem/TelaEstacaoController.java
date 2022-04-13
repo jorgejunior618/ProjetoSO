@@ -71,10 +71,10 @@ public class TelaEstacaoController implements Initializable {
 	public void logLigarDesligar(ActionEvent event) {
 		if (Log.getAtivado()) {
 			Log.setAtivado(false);
-			menuLogs.setText("Desligar Log");
+			menuLogs.setText("Ligar Log");
 		} else {
 			Log.setAtivado(true);
-			menuLogs.setText("Ligar Log");
+			menuLogs.setText("Desligar Log");
 		}
 	}
 
