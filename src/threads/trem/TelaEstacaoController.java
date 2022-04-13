@@ -60,7 +60,7 @@ public class TelaEstacaoController implements Initializable {
 	private void musicaPausarIniciar(ActionEvent event) {
 		if (Main.musica.tocando) {
 			Main.musica.pararMusica();
-			menuMusica.setText("Ligar mÃºsica");
+			menuMusica.setText("Ligar música");
 		} else {
 			Main.musica.tocarMusica();
 			menuMusica.setText("Desligar mÃºsica");
@@ -315,7 +315,7 @@ public class TelaEstacaoController implements Initializable {
 		
 		Main.tremDeCarga.start();
 		Main.empacotadores[0].start();
-		menuMusica.setText("Desligar mÃºsica");
+		menuMusica.setText("Desligar música");
 		menuLogs.setText("Desligar Log");
 		Main.musica.tocarMusica();
 	}
