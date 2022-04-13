@@ -59,9 +59,6 @@ public class Main extends Application {
 	public static void alterarQtMoedas(int quantidade) {
 		try {
 			mutexMoedas.acquire();
-			System.out.println();
-			System.out.println("Carga carregada: " + Integer.toString(qtmoedas));
-			System.out.println("Carga carregada: " + Integer.toString(quantidade));
 			qtmoedas += quantidade;
 			mutexMoedas.release();
 		} catch (InterruptedException e) {

@@ -127,7 +127,7 @@ public class TelaMelhoriasController implements Initializable {
 	private void melhorarEstacao() {
 
 		if (Main.modoJogo == ModoJogo.DESAFIO && Main.qtmoedas < custoEmpacotadorInt) {
-			System.out.println("Saldo Insuficiente");
+			avisaSaldoInsuficiente();
 			return;
 		}
 		
@@ -192,7 +192,7 @@ public class TelaMelhoriasController implements Initializable {
 	@FXML
 	private void melhorarTrem() {
 		if (Main.modoJogo == ModoJogo.DESAFIO && Main.qtmoedas < custoEmpacotadorInt) {
-			System.out.println("Saldo Insuficiente");
+			avisaSaldoInsuficiente();
 			return;
 		}
 		
@@ -235,7 +235,7 @@ public class TelaMelhoriasController implements Initializable {
 	@FXML
 	private void melhorarEmpacotador() {
 		if (Main.modoJogo == ModoJogo.DESAFIO && Main.qtmoedas < custoEmpacotadorInt) {
-			System.out.println("Saldo Insuficiente");
+			avisaSaldoInsuficiente();
 			return;
 		}
 		
@@ -320,6 +320,15 @@ public class TelaMelhoriasController implements Initializable {
 		empacotadorAtual.setText(Integer.toString(empacotadorSelecionado));
 		totalEmpacotadores.setText("10");
 	}
+	
+/* Métodos de registro de Log */
+	
+	private void avisaSaldoInsuficiente() {
+		String mensagem = "Impossível realizar melhoria com saldo atual!";
+		
+		Log.printlog(Log.codigoErro, mensagem);
+	}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

@@ -44,7 +44,6 @@ public class Trem extends Thread {
 			tempoCorrido = System.currentTimeMillis() - inicio;
 		}
 		avisaChegada();
-		System.out.println(String.format("O Trem voltou Ã  estaÃ§Ã£o."));
 	}
 
 	private void transportar() {

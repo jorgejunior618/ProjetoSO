@@ -30,14 +30,12 @@ public class Empacotador extends Thread {
 		while(System.currentTimeMillis() - inicio  < (long) (tempoEmpacotamento * 1000) - 500 && !Main.encerrarThreads) {
 		}
 		this.controller.ficarProntoEmpacotador(this.id);
-		System.out.println(getName() + ": Terminou de empacotar");
 	}
 
 	/**
 	 * Função para chamar a animação de ir deixar o pacote na posição do depósito
 	 */
 	private void deixarPacote() throws InterruptedException {
-		System.out.println(getName() + ": Foi guardar pacote");
 		this.controller.entregarPacoteEmpacotador(this.id);
 
 		long inicio = System.currentTimeMillis();

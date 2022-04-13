@@ -174,7 +174,6 @@ public class TelaEstacaoController implements Initializable {
 				case NENHUMA:
 					break;
 			}
-            mostrarPropriedadesEstacao();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -318,7 +317,7 @@ public class TelaEstacaoController implements Initializable {
 		Main.empacotadores[0].start();
 		menuMusica.setText("Desligar música");
 		menuLogs.setText("Desligar Log");
-//		Main.musica.tocarMusica();
+		Main.musica.tocarMusica();
 	}
 	
 }
