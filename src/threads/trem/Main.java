@@ -84,7 +84,7 @@ public class Main extends Application {
 					}
 				}
 				
-				if(System.currentTimeMillis() - inicio > 2000) {
+				if(System.currentTimeMillis() - inicio > 1000) {
 					Main.tremDeCarga.interrupt();
 					
 					for (int i = 0; i < 10; i++) {

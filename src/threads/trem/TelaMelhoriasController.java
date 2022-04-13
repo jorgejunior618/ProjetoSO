@@ -279,7 +279,7 @@ public class TelaMelhoriasController implements Initializable {
 	@FXML
 	private void empacotadorAnterior() {
 		int selecaoAtual = empacotadorSelecionado;
-		while (Main.empacotadores[empacotadorSelecionado] == null) {
+		do  {
 			empacotadorSelecionado -= 1;
 			if (empacotadorSelecionado < 0) {
 				empacotadorSelecionado = 9;
@@ -287,13 +287,14 @@ public class TelaMelhoriasController implements Initializable {
 			if (empacotadorSelecionado == selecaoAtual) {
 				break;
 			}
-		}
+		} while (Main.empacotadores[empacotadorSelecionado] == null);
 		tempoEmpacotamentoInt = Main.empacotadores[empacotadorSelecionado].tempoEmpacotamento;
 		custoEmpacotadorInt = 0;
 		
 		nomeEmpacotador.setText(Main.empacotadores[empacotadorSelecionado].nome);
 		identificadorEmpacotador.setText(Main.empacotadores[empacotadorSelecionado].identificador);
 		tempoEmpacotamentoEmpacotador.setText(Integer.toString(tempoEmpacotamentoInt));
+		empacotadorAtual.setText(Integer.toString(empacotadorSelecionado));
 		custoEmpacotador.setText("0");
 	}
 
