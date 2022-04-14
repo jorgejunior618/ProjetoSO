@@ -3,9 +3,9 @@
  Projeto criado para a cadeira de Sistemas Operacionais, aplicando o conceito de processos multi-threads e concorrência.
  
  ## Equipe
- - Francisco Jorge Monteiro Júnior
- - João Augusto de Oliveira Sousa
- - Raphael Cabral de Oliveira Figueiredo
+ - [Francisco Jorge Monteiro Júnior](francisco.jorge.monteiro07@aluno.ifce.edu.br)
+ - [João Augusto de Oliveira Sousa](joao.augusto.oliveira08@aluno.ifce.edu.br)
+ - [Raphael Cabral de Oliveira Figueiredo](raphael.cabral.oliveira04@aluno.ifce.edu.br)
 
  ## Tecnologias Utilizadas
 
